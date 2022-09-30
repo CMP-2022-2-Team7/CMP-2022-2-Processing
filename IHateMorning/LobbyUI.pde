@@ -48,4 +48,14 @@ class LobbyUI{
     text(start, width/2, 360-titleMoving);
     fill(255);
   }
+
+  /* return true if mouse is on the start button */
+  boolean checkStart(){
+  if (mouseX >= startPositionX && mouseX <= startPositionX+startSizeX &&
+      mouseY >= startPositionY && mouseY <= startPositionY+startSizeY) {
+    return true;
+  } else {
+    return false;
+  }
+}
 }
