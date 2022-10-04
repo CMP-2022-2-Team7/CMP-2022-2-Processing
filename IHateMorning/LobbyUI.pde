@@ -8,19 +8,36 @@ class LobbyUI{
   int startPositionX; // variable for start button's position X
   int startPositionY; // variable for start button's position Y
 
+  Button startButton; // start button object
+
   LobbyUI(){
     /* set the size of start button */
     startSizeX = 400;
     startSizeY = 100;
     startPositionX = width/2-200;
     startPositionY = 300-titleMoving;
+
+    /* generate start button and set specification */
+    startButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, start);
+    startButton.setTexetSize(48);
+    startButton.setTextR(135);
+    startButton.setTextG(206);
+    startButton.setTextB(255);
+    startButton.setTextPositionX(width/2);
+    startButton.setTextPositionY(360-titleMoving);
   }
   void drawLobby(){
     /* clear sceen */
     background(135, 206, 235);
+    startPositionY = 300-titleMoving;
 
     drawTitle();
-    drawStart();
+    //drawStart();
+
+
+    startButton.drawButton();
+    startButton.setButtonPositionY(startPositionY);
+    startButton.setTextPositionY(startPositionY+60);
 
     /* make title move */
     if(titleMoving < 100){
@@ -34,28 +51,4 @@ class LobbyUI{
     textSize(72);
     text(title, width/2, titleMoving);
   }
-
-  /* set the start button */
-  void drawStart(){
-    startPositionY = 300-titleMoving;
-
-    /* draw start button */
-    fill(255);
-    noStroke();
-    rect(startPositionX, startPositionY, startSizeX, startSizeY, 28);
-    textSize(48);
-    fill(135, 206, 255);
-    text(start, width/2, 360-titleMoving);
-    fill(255);
-  }
-
-  /* return true if mouse is on the start button */
-  boolean checkStart(){
-  if (mouseX >= startPositionX && mouseX <= startPositionX+startSizeX &&
-      mouseY >= startPositionY && mouseY <= startPositionY+startSizeY) {
-    return true;
-  } else {
-    return false;
-  }
-}
 }
