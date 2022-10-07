@@ -27,12 +27,12 @@ class Scene2{
 
     /* make ingredient list and add ingredient that user choose */
     ingredientList = new ArrayList<String>();
-    ingredientList.add("egg");
-    ingredientList.add("meat");
-    ingredientList.add("rice");
-    ingredientList.add("milk");
-    ingredientList.add("noodle");
-    ingredientList.add("fish");
+    ingredientList.add("Korea food");
+    ingredientList.add("Fusion food");
+    ingredientList.add("Italian food");
+    ingredientList.add("Chinese food");
+    ingredientList.add("Western food");
+    ingredientList.add("Japanese food");
     pickIngredient();
 
     /* set ingredient button specifications */
