@@ -21,6 +21,9 @@ class Scene2{
   Button ingredientButton2;
   Button ingredientButton3;
 
+  /* ParsingRecipe */
+  ParsingRecipe parsingRecipe;
+
   Scene2(){
     /* load background image */
     background = loadImage("kitchen-stage2.jpg");
@@ -55,6 +58,8 @@ class Scene2{
     ingredientButton3 = new Button(ingredient3PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, randomIngredient3);
     ingredientButton3.setTextPositionX(ingredient3PositionX+100);
     ingredientButton3.setTextPositionY(ingredientPositionY+50);
+
+    parsingRecipe = new ParsingRecipe();
   }
   void drawScene2(){
     /* clear sceen */
