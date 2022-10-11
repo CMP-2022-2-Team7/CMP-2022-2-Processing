@@ -32,12 +32,21 @@ void mousePressed(){
   if(move2 == true){
     if(scene2.ingredientButton1.checkClick()){
       background(0);
+      scene2.button1Clicked = true;
+      scene2.button2Clicked = false;
+      scene2.button3Clicked = false;
     }
     else if(scene2.ingredientButton2.checkClick()){
       background(0);
+      scene2.button1Clicked = false;
+      scene2.button2Clicked = true;
+      scene2.button3Clicked = false;
     }
     else if(scene2.ingredientButton3.checkClick()){
       background(0);
+      scene2.button1Clicked = false;
+      scene2.button2Clicked = false;
+      scene2.button3Clicked = true;
     }
   }
 }

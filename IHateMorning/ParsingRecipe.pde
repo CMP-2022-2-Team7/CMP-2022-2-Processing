@@ -1,15 +1,9 @@
 class ParsingRecipe{
-  PFont font;
-  Table table;
+  Table table;    // Variable for storing recipes
 
   ParsingRecipe(){
     table = loadTable("recipe-stage2.csv", "header");
-    println("Total rows in table : " + table.getRowCount());
-    //font = createFont("NanumGothicBold", 16);
-    String[] list = PFont.list();
-    printArray(list);
-    //textFont(font);
-    text("테스트", 200, 200);
+    println("Total numbers of dishes in table : " + table.getRowCount());
   }
 
   void printDishName(){
