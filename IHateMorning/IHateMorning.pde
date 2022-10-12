@@ -1,17 +1,21 @@
 LobbyUI lobbyUI;
 Scene2 scene2;
+Scene3 scene3;
 
 /* temporary variables for moving to other stage */
 boolean move0;
 boolean move2;
+boolean move3;
 
 void setup(){
   size(800, 450);
 
   lobbyUI = new LobbyUI();
   scene2 = new Scene2();
+  scene3 = new Scene3();
   move0 = true;
   move2 = false;
+  move3 = false;
 }
 void draw(){
   if(move0 == true){
@@ -20,6 +24,9 @@ void draw(){
   /* when '2' is pressed, move to stage 2 */
   if(move2 == true){
     scene2.drawScene2();
+  }
+  if(move3 == true){
+    scene3.drawScene3();
   }
 }
 void mousePressed(){
@@ -61,6 +68,41 @@ void keyPressed(){
     else if(move2 == true){
       move0 = true;
       move2 = false;
+    }
+  }
+  if(key == '3'){
+    if(move3 == false){
+      //if(move2 == false){
+      //  move0 = false;
+      //  move3 = true;
+      //}
+      //else if(move2 == true){
+      //  move0 = false;
+      //  move2 = false;
+      //  move3 = true;
+      //}
+      move0 = false;
+      move2 = false;
+      move3 = true;
+    }
+    else if(move3 == true){
+      move0 = true;
+      move3 = false;
+    }
+  }
+  if(move3 == true){
+    if(key == CODED){
+      if(keyCode == RIGHT){
+        if(scene3.obj.x <= 700){
+          scene3.obj.x += 20;
+        }
+        image(scene3.background,0,0,width,height);
+      }else if(keyCode == LEFT){
+        if(scene3.obj.x >= 20){
+          scene3.obj.x -= 20;
+        }
+        image(scene3.background,0,0,width,height);
+      }
     }
   }
 }
