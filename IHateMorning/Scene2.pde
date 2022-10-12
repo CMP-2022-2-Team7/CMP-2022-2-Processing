@@ -79,7 +79,8 @@ class Scene2{
     dishButton3.setTextPositionY(150);
 
     parsingRecipe = new ParsingRecipe();
-
+    parsingRecipe.printDishName();
+    
     button1Clicked = false;
     button2Clicked = false;
     button3Clicked = false;
