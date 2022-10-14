@@ -1,7 +1,7 @@
 class Scene1{
   PImage background;
   PImage toothbrush;
-  float xpos_t, ypos_t;  //toothbrush position
+  float xposT, yposT;  //toothbrush position
   float xpos, ypos;  //germ position
   boolean brush = false;
   boolean pick = false;
@@ -12,6 +12,7 @@ class Scene1{
   int countDown;
   int hp = 5;
   int success = 0;
+  int ms;
 
   Scene1(){
     //basic setting
@@ -47,8 +48,8 @@ class Scene1{
 }
 
 void toothbrush_follow() {
-  xpos_t = lerp(xpos_t, mouseX, 1);
-  ypos_t = lerp(ypos_t, mouseY, 1);
+  xposT = lerp(xposT, mouseX, 1);
+  yposT = lerp(yposT, mouseY, 1);
 }
 
  void germ() {
@@ -62,7 +63,7 @@ void toothbrush_follow() {
 
   void timer() {
     //println("Timer Start");
-  int ms = millis() / 1000;
+  ms = millis() / 1000;
   countDown = timeLimit - ms;
   if (countDown > 0) {
     image(background, 0, 0, width, height);

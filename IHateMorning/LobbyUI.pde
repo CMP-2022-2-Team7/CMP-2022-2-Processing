@@ -4,7 +4,7 @@ class LobbyUI{
   String title = "I    H A T E    M O R N I G"; // game title text
   String start = "START"; // start button text
   String credit = "CREDIT"; // credit button text
-  String setting = "SEETING"; // sound button text
+  String setting = "SETTING"; // sound button text
   int titleMoving = 0;  // variable for title, button's movement
 
   int startSizeX; // variable for start button's X-axis size
@@ -20,7 +20,7 @@ class LobbyUI{
     img2 = loadImage("Lovepik_com-400162463-school-scene.jpg");
     /* set the size of start button */
     startSizeX = 400;
-    startSizeY = 100;
+    startSizeY = 80;
     startPositionX = width/2-200;
     startPositionY = 300-titleMoving;
 

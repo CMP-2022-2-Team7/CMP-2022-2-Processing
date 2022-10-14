@@ -1,10 +1,10 @@
-import processing.sound.*;
-SoundFile bgm;
+//import processing.sound.*;
+//SoundFile bgm;
 
 LobbyUI lobbyUI;
-creditScene creditscene;
-settingScene settingscene;
-storyScene storyscene;
+CreditScene creditscene;
+SettingScene settingscene;
+StoryScene storyscene;
 Scene1 scene1;
 Scene2 scene2;
 Scene3 scene3;
@@ -22,15 +22,15 @@ boolean move3;
 float volume = 1.0;
 
 void setup(){
-  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
-  bgm.play();
+  //bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+  //bgm.play();
   
   size(800, 450);
 
   lobbyUI = new LobbyUI();
-  creditscene = new creditScene();
-  settingscene = new settingScene();
-  storyscene = new storyScene();
+  creditscene = new CreditScene();
+  settingscene = new SettingScene();
+  storyscene = new StoryScene();
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
@@ -43,7 +43,7 @@ void setup(){
   move3 = false;
 }
 void draw(){
-  bgm.amp(volume);
+  //bgm.amp(volume);
 
   if(move0 == true){
     lobbyUI.drawLobby();

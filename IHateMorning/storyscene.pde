@@ -1,13 +1,13 @@
 PImage img3;
 
-class storyScene{
+class StoryScene{
   
   Button backButton;
   Button goButton;
   String back = "BACK";
   String go = "GO";
 
-storyScene(){
+StoryScene(){
   img3 = loadImage("storyimage_student.png");
   backButton = new Button(45, 42, 55, 40, back);
   goButton = new Button(700,380,55,40,go);

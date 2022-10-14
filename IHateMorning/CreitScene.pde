@@ -1,12 +1,12 @@
 PImage img;
 PFont font;
 
-class creditScene{
+class CreditScene{
   
   Button backButton;
   String back = "BACK";
   
-  creditScene(){
+  CreditScene(){
     font = loadFont("FreestyleScript-Regular-48.vlw");
     img = loadImage("board.png");
     textFont(font,20);
@@ -26,7 +26,7 @@ class creditScene{
   textSize(45);
   text("202127185 Semin Eun",width/2,150);
   text("201623445 Hyeoungchan Jo",width/2,210);
-  text("202127229 Moon Seohyun",width/2,270);
+  text("202127229 Seohyun Moon",width/2,270);
   text("202127254 Hyuna Bae",width/2,330);
   
    backButton.drawButton();

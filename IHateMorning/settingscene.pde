@@ -1,14 +1,14 @@
 PImage img4;
 PImage img5;
 
-class settingScene{
+class SettingScene{
   
   Button backButton;
   String back = "BACK";
   int a =width/2;
   float sound;
   
-  settingScene(){
+  SettingScene(){
      img4 = loadImage("board.png");
      img5 = loadImage("sound.png");
   backButton = new Button(73,62, 55, 40, back);
