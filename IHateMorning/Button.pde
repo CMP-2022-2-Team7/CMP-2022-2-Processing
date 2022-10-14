@@ -43,7 +43,7 @@ class Button{
     /* draw button shape*/
     fill(getButtonR(), getButtonG(), getButtonB(), getButtonA());
     noStroke();
-    rect(getButtonPositionX(), getButtonPositionY(), getButtonSizeX(), getButtonSizeY());
+    rect(getButtonPositionX(), getButtonPositionY(), getButtonSizeX(), getButtonSizeY(),20);
 
     /* draw text in button */
     textSize(getTextSize());
