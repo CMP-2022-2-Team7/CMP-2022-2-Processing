@@ -12,14 +12,13 @@ class Scene1{
   int countDown;
   int hp = 5;
   int success = 0;
-  
+
   Scene1(){
     //basic setting
     background = loadImage("face.jpg");
     toothbrush = loadImage("toothbrush.png");
-    frameRate(1);
   }
-  
+
   void drawScene1(){
     image(background, 0, 0, width, height);
     image(toothbrush, 650, 350);
@@ -39,7 +38,7 @@ class Scene1{
     pick = false;
   }
   }
-  
+
   void germ_ex() {
   if (germ_exist == true) {
     germ();
@@ -60,7 +59,7 @@ void toothbrush_follow() {
     fill(150);
     ellipse(xpos, ypos, 25, 25);
   }
-  
+
   void timer() {
     //println("Timer Start");
   int ms = millis() / 1000;
