@@ -1,15 +1,15 @@
 class Scene2{
   /* variables for creating option */
   ArrayList<String> ingredientList;
-  ParsingRecipe parsingRecipe;
+  ParsingRecipe parsingRecipe;    // Object for parisng csv file
 
   /* variables for ingredient option button */
-  int ingredientSizeX; // ingredient1 button's X-axis size
-  int ingredientSizeY; // ingredient1 button's Y-axis size
-  float ingredient1PositionX; // ingredient1 button's position X
-  float ingredient2PositionX;
-  float ingredient3PositionX;
-  int ingredientPositionY; // ingredient1 button's position Y
+  int ingredientSizeX; // ingredient button's X-axis size
+  int ingredientSizeY; // ingredient button's Y-axis size
+  float ingredient1PositionX;    // ingredient1 button's position X
+  float ingredient2PositionX;    // ingredient2 button's position X
+  float ingredient3PositionX;    // ingredient3 button's position X
+  int ingredientPositionY; // ingredient button's position Y
 
   /* variable for drawing background */
   PImage background;
@@ -25,9 +25,11 @@ class Scene2{
   boolean button3Clicked;
 
   /* Dish button */
-  Button dishButton1;
-  Button dishButton2;
-  Button dishButton3;
+  Button dishButton;
+
+  /* Variable for print dish name */
+  boolean setCategory;
+  PFont stage2Font;    // Font for dish name
 
   Scene2(){
     /* load background image */
@@ -68,22 +70,19 @@ class Scene2{
     ingredientButton3.setTexetSize(30);
 
     /* generate result button and set specification */
-    dishButton1 = new Button(width/2-100, 100, 200, 100, "button1 clicked");
-    dishButton1.setTextPositionX(width/2);
-    dishButton1.setTextPositionY(150);
-    dishButton2 = new Button(width/2-100, 100, 200, 100, "button2 clicked");
-    dishButton2.setTextPositionX(width/2);
-    dishButton2.setTextPositionY(150);
-    dishButton3 = new Button(width/2-100, 100, 200, 100, "button3 clicked");
-    dishButton3.setTextPositionX(width/2);
-    dishButton3.setTextPositionY(150);
+    dishButton = new Button(width/2-300, 90, 600, 100, "button1 clicked");
+    dishButton.setTextPositionX(width/2);
+    dishButton.setTextPositionY(150);
 
     parsingRecipe = new ParsingRecipe();
-    parsingRecipe.printDishName();
-    
+
     button1Clicked = false;
     button2Clicked = false;
     button3Clicked = false;
+
+    setCategory = false;
+    stage2Font = createFont("NanumGothicBold.otf", 28);
+    textFont(stage2Font);
   }
   void drawScene2(){
     /* clear sceen */
@@ -97,13 +96,28 @@ class Scene2{
   /* pick ingredient option randomly */
   void pickIngredient(){
     if(button1Clicked){
-        dishButton1.drawButton();
+        dishButton.drawButton();
     }
     else if(button2Clicked){
-        dishButton2.drawButton();
+        dishButton.drawButton();
     }
     else if(button3Clicked){
-        dishButton3.drawButton();
+        dishButton.drawButton();
     }
+  }
+  void pickDish(){
+    setCategory = true;
+    if(setCategory){
+      if(button1Clicked){
+        dishButton.setText(parsingRecipe.printDishName("한식"));
+      }
+      else if(button2Clicked){
+        dishButton.setText(parsingRecipe.printDishName("퓨전"));
+      }
+      else if(button3Clicked){
+        dishButton.setText(parsingRecipe.printDishName("이탈리아"));
+      }
+    }
+    setCategory = false;
   }
 }
