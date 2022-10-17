@@ -1,7 +1,7 @@
-PImage creditImg;
-PFont font;
-
 class CreditScene{
+ PImage creditImg;
+ PFont font;
+  
   Button backButton;
   String back = "BACK";
   
