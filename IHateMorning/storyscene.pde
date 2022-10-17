@@ -1,6 +1,5 @@
-PImage storyImg;
-
 class StoryScene{
+  PImage storyImg;
   Button backButton;
   Button goButton; // can delete
   String back = "BACK";
