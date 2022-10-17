@@ -1,10 +1,12 @@
-PImage img2;
+PImage lobbyImg;
+PImage soundImg;
+PImage nosoundImg;
 
 class LobbyUI{
-  String title = "I    H A T E    M O R N I G"; // game title text
+  boolean soundStatus = true; // background music status
+  String title = "I HATE MORNIG"; // game title text
   String start = "START"; // start button text
   String credit = "CREDIT"; // credit button text
-  String setting = "SETTING"; // sound button text
   int titleMoving = 0;  // variable for title, button's movement
 
   int startSizeX; // variable for start button's X-axis size
@@ -14,15 +16,17 @@ class LobbyUI{
 
   Button startButton; // start button object
   Button creditButton; // credit button object
-  Button settingButton; // setting button object
-
+  
   LobbyUI(){
-    img2 = loadImage("Lovepik_com-400162463-school-scene.jpg");
+    lobbyImg = loadImage("Lovepik_com-400162463-school-scene.jpg"); // lobby background Img
+    soundImg = loadImage("_sound.png"); // when the sound comes out
+    nosoundImg = loadImage("nosound.png"); // when there's no sound
+    
     /* set the size of start button */
     startSizeX = 400;
     startSizeY = 80;
     startPositionX = width/2-200;
-    startPositionY = 300-titleMoving;
+    startPositionY = 400-titleMoving;
 
     /* generate start button and set specification */
     startButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, start);
@@ -31,12 +35,15 @@ class LobbyUI{
     startButton.setTextG(206);
     startButton.setTextB(255);
     startButton.setTextPositionX(width/2);
-    startButton.setTextPositionY(360-titleMoving);
+    startButton.setTextPositionY(450-titleMoving);
     
+    /* set the size of credit button */
     startSizeX = 400;
     startSizeY = 80;
     startPositionX = width/2-200;
-    startPositionY = 400-titleMoving;
+    startPositionY = 450-titleMoving;
+    
+    /* generate credit button and set specification */
     creditButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, credit);
     creditButton.setTexetSize(48);
     creditButton.setTextR(135);
@@ -44,48 +51,40 @@ class LobbyUI{
     creditButton.setTextB(255);
     creditButton.setTextPositionX(width/2);
     creditButton.setTextPositionY(460-titleMoving);
-    
-    startSizeX = 400;
-    startSizeY = 80;
-    startPositionX = width/2-200;
-    startPositionY = 500-titleMoving;
-    settingButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, setting);
-    settingButton.setTexetSize(48);
-    settingButton.setTextR(135);
-    settingButton.setTextG(206);
-    settingButton.setTextB(255);
-    settingButton.setTextPositionX(width/2);
-    settingButton.setTextPositionY(560-titleMoving);
   }
   
   void drawLobby(){
-    /* clear sceen */
-    background(135, 206, 235);
-    image(img2,0,0,800,500);
-    startPositionY = 250-titleMoving;
+    image(lobbyImg,0,0,800,500);
+    
+    if(soundStatus == true){
+     image(soundImg,40,380,50,50);
+    }else if(!soundStatus){ 
+    image(nosoundImg,40,380,50,50);}
 
+    startPositionY = 300-titleMoving;
     drawTitle();
     //drawStart();
-
-
+    
     startButton.drawButton();
     startButton.setButtonPositionY(startPositionY);
     startButton.setTextPositionY(startPositionY+60);
     
-    startPositionY = 350-titleMoving;
+    startPositionY = 400-titleMoving;
     creditButton.drawButton();
     creditButton.setButtonPositionY(startPositionY);
     creditButton.setTextPositionY(startPositionY+60);
     
-    startPositionY = 450-titleMoving;
-    settingButton.drawButton();
-    settingButton.setButtonPositionY(startPositionY);
-    settingButton.setTextPositionY(startPositionY+60);
-
     /* make title move */
     if(titleMoving < 100){
       titleMoving++;
     }
+  }
+  
+  boolean checkClick(){
+    if(40 <= mouseX && mouseX <= 90 && 380 <= mouseY && mouseY <= 430){
+      return true;
+    }
+    else return false;
   }
 
   /* set the property of name of game */
@@ -93,5 +92,12 @@ class LobbyUI{
     textAlign(CENTER);
     textSize(72);
     text(title, width/2, titleMoving);
+  }
+  
+  void changeSoundImg(){
+    if(soundStatus){
+      soundStatus = false;
+    }else if(!soundStatus){
+      soundStatus = true;}
   }
 }

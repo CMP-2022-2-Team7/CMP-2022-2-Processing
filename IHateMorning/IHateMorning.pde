@@ -1,10 +1,10 @@
-//import processing.sound.*;
-//SoundFile bgm;
+import processing.sound.*;
+SoundFile bgm;
 
 LobbyUI lobbyUI;
 CreditScene creditscene;
-SettingScene settingscene;
 StoryScene storyscene;
+Scene1Story scene1story;
 Scene1 scene1;
 Scene2 scene2;
 Scene3 scene3;
@@ -12,50 +12,45 @@ Scene3 scene3;
 /* temporary variables for moving to other stage */
 boolean move0;
 boolean movecredit;
-boolean movesetting;
 boolean movestory;
+boolean movestory1;
 boolean move1;
 boolean move2;
 boolean move3;
 
-//기본bgm 음량 변수
-float volume = 1.0;
-
 void setup(){
-  //bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
-  //bgm.play();
+  //temporary background music
+  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+  bgm.play();
   
   size(800, 450);
 
   lobbyUI = new LobbyUI();
   creditscene = new CreditScene();
-  settingscene = new SettingScene();
   storyscene = new StoryScene();
+  scene1story = new Scene1Story();
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
   move0 = true;
   movecredit = false;
-  movesetting = false;
   movestory = false;
   move1 = false;
   move2 = false;
   move3 = false;
 }
 void draw(){
-  //bgm.amp(volume);
-
   if(move0 == true){
     lobbyUI.drawLobby();
   }
   if(movecredit == true){
   creditscene.drawcreditscene();
   }
-  if(movesetting== true){
-  settingscene.drawsettingscene();
-  }
   if(movestory == true){
     storyscene.drawstoryscene();
+  }
+  if(movestory1 == true){
+    scene1story.drawScene1Story();
   }
   if(move1 == true){
     scene1.drawScene1();
@@ -70,41 +65,44 @@ void draw(){
 }
 
 void mousePressed(){
-  /* if mouse is on start button, can click it */
   if(move0 == true){
+     // if mouse is on start button, can click it 
     if(lobbyUI.startButton.checkClick()){
+      move0 = false;
       movestory = true;
     }
+     // if mouse is on credit button, can click it 
     if(lobbyUI.creditButton.checkClick()){
       move0 = false;
-      movesetting = false;
       movecredit = true;
     }
-    if(lobbyUI.settingButton.checkClick()){
-      move0 = false;
-      movesetting = true;
+    // if mouse is on sound image, can click it 
+    if(lobbyUI.checkClick()){
+      lobbyUI.changeSoundImg(); 
+      if(lobbyUI.soundStatus == true){
+        bgm.play();
+      }else if(lobbyUI.soundStatus == false){
+      bgm.pause();}
     }
   }
+  
   if(movecredit == true){
    if(creditscene.backButton.checkClick()){
       move0 = true;
       movecredit = false; 
     }
   }
-  if(movesetting == true){
-  if(settingscene.backButton.checkClick()){
-      move0 = true;
-      movesetting = false; 
-    }
-  }
+  
   if(movestory == true){
    if(storyscene.backButton.checkClick()){
       move0 = true;
       movestory = false; 
     }else if(storyscene.goButton.checkClick()){
-     background(0);
+     movestory = false;
+     movestory1 = true;
    }
   }
+  
   if(move2 == true){
     if(scene2.ingredientButton1.checkClick()){
       background(0);
@@ -224,15 +222,4 @@ void keyPressed(){
       }
     }
   }
-}
-void mouseDragged(){
-//constrain(soundscene.a,250,630);
-settingscene.a = mouseX;
-if(settingscene.a>620){
-settingscene.a = 620;
-}else if(settingscene.a<250){
-settingscene.a = 270;
-}
-volume = settingscene.sound ;
- 
 }
