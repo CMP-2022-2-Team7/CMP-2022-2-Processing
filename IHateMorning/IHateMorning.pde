@@ -104,12 +104,6 @@ void mousePressed(){
       movecredit = false;
     }
   }
-  if(movesetting == true){
-  if(settingscene.backButton.checkClick()){
-      move0 = true;
-      movesetting = false;
-    }
-  }
   if(movestory == true){
    if(storyscene.backButton.checkClick()){
       move0 = true;
@@ -251,15 +245,4 @@ void keyPressed(){
       }
     }
   }
-}
-void mouseDragged(){
-//constrain(soundscene.a,250,630);
-settingscene.a = mouseX;
-if(settingscene.a>620){
-settingscene.a = 620;
-}else if(settingscene.a<250){
-settingscene.a = 270;
-}
-volume = settingscene.sound ;
-
 }
