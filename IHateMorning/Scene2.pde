@@ -31,9 +31,8 @@ class Scene2{
   boolean button2Clicked;
   boolean button3Clicked;
 
-  /* Dish button */
-  Button dishButton;
-  Button calorieButton;
+  /* Dialogue button */
+  Button dialogueButton;
 
   /* Decision button */
   Button yesButton;
@@ -45,8 +44,9 @@ class Scene2{
 
   /* Phase in scene 2 */
   boolean phase1;    // Show categories
-  boolean phase2;    //
+  boolean phase2;
   boolean phase3;
+  boolean phase4;
 
   Scene2(){
     /* Initialize scene checking */
@@ -63,7 +63,6 @@ class Scene2{
     ingredientList.add("Chinese food");
     ingredientList.add("Western food");
     ingredientList.add("Japanese food");
-    pickIngredient();
 
     /* set ingredient button specifications */
     ingredientSizeX = 200;
@@ -96,10 +95,10 @@ class Scene2{
     ingredientButton3.setTexetSize(30);
 
     /* generate result button and set specification */
-    dishButton = new Button(30, 30, 370, 260, "Good Morning!\nPick the category \nyou want to eat");
-    dishButton.setTextPositionX((30+370)/2+10);
-    dishButton.setTextPositionY((30+260)/2);
-    dishButton.setTexetSize(25);
+    dialogueButton = new Button(30, 30, 370, 260, "Good Morning!\nPick the category \nyou want to eat");
+    dialogueButton.setTextPositionX((30+370)/2+10);
+    dialogueButton.setTextPositionY((30+260)/2);
+    dialogueButton.setTexetSize(25);
 
     /* Generate decision button and set specification */
     yesButton = new Button(ingredient1PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, "YES");
@@ -126,8 +125,10 @@ class Scene2{
     phase1 = true;
     phase2 = false;
     phase3 = false;
+    phase4 = false;
   }
   void drawScene2(){
+    textFont(stage2Font);
     /* clear sceen */
     image(background, 0, 0, width, height);
     image(mom, 400, 0, width/2, height/1.5);
@@ -138,44 +139,51 @@ class Scene2{
       ingredientButton1.drawButton();
       ingredientButton2.drawButton();
       ingredientButton3.drawButton();
-      dishButton.drawButton();
+      dialogueButton.drawButton();
     }
     if(phase2){
       yesButton.drawButton();
       noButton.drawButton();
-      dishButton.drawButton();
+      dialogueButton.drawButton();
     }
-  }
-
-  /* pick ingredient option randomly */
-  void pickIngredient(){
-    if(button1Clicked){
-        dishButton.drawButton();
+    if(phase3){
+      dialogueButton.setText("It is not enought for you \nChoose more dishes!!!");
+      ingredientButton1.drawButton();
+      ingredientButton2.drawButton();
+      ingredientButton3.drawButton();
+      dialogueButton.drawButton();
     }
-    else if(button2Clicked){
-        dishButton.drawButton();
-    }
-    else if(button3Clicked){
-        dishButton.drawButton();
+    if(phase4){
+      dialogueButton.setText("Pick the category \nyou want to eat");
+      ingredientButton1.drawButton();
+      ingredientButton2.drawButton();
+      ingredientButton3.drawButton();
+      dialogueButton.drawButton();
     }
   }
   void pickCategory(){
     setCategory = true;
     if(setCategory){
       if(button1Clicked){
-        dishButton.setText("Do you want \n" + parsingRecipe.printDishName("한식") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
+        dialogueButton.setText("Do you want \n" + parsingRecipe.printDishName("한식") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
         phase1 = false;
         phase2 = true;
+        phase3 = false;
+        phase4 = false;
       }
       else if(button2Clicked){
-        dishButton.setText("Do you want \n" + parsingRecipe.printDishName("퓨전") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
+        dialogueButton.setText("Do you want \n" + parsingRecipe.printDishName("퓨전") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
         phase1 = false;
         phase2 = true;
+        phase3 = false;
+        phase4 = false;
       }
       else if(button3Clicked){
-        dishButton.setText("Do you want \n" + parsingRecipe.printDishName("이탈리아") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
+        dialogueButton.setText("Do you want \n" + parsingRecipe.printDishName("이탈리아") +"? \nIt is " + parsingRecipe.dishHashMap.get(parsingRecipe.dishName) +"kcal.");
         phase1 = false;
         phase2 = true;
+        phase3 = false;
+        phase4 = false;
       }
     }
     setCategory = false;

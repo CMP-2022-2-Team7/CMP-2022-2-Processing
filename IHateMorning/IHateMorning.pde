@@ -30,8 +30,8 @@ boolean objMoveRight;
 boolean objMoveLeft;
 
 float volume = 1.0;
- 
-  
+
+
 void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
@@ -66,7 +66,7 @@ void setup(){
 void draw(){
 
   textFont(font,50);
-  
+
   if(move0 == true){
     lobbyUI.drawLobby();
   }
@@ -173,9 +173,9 @@ void mousePressed(){
    
    
 
-   
+
   if(move2 == true){
-    if(scene2.phase1){
+    if(scene2.phase1 || scene2.phase3){
       if(scene2.ingredientButton1.checkClick()){
         scene2.button1Clicked = true;
         scene2.button2Clicked = false;
@@ -195,15 +195,18 @@ void mousePressed(){
         scene2.pickCategory();
       }
     }
-    else if(scene2.phase2){
+    else if(scene2.phase2 || scene2.phase3){
       if(scene2.yesButton.checkClick()){
-        scene2.phase1 = true;
+        //scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = true;
         scene2.scene2Checking++;
       }
       else if(scene2.noButton.checkClick()){
         scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = false;
+        scene2.phase4 = true;
       }
     }
   }
@@ -267,13 +270,11 @@ void keyPressed(){
     if(keyCode == ' ') {
       if(mouseX >= scene1.xpos - 12.5 && mouseX <= scene1.xpos + 12.5) {
         if (mouseY >= scene1.ypos - 12.5 && mouseY <= scene1.ypos + 12.5) {
-          scene1.hp = scene1.hp - 1;
-          println("hp = " + scene1.hp);
+          scene1.hp = scene1.hp - 1;  //check germ's hp
+          //println("hp = " + scene1.hp);
           image(scene1.background, 0, 0, width, height);
           scene1.timer();
-          fill(0);
-          ellipse(scene1.xpos, scene1.ypos, 20, 20);
-          fill(150);
+          image(scene1.ouch, scene1.xpos - 20, scene1.ypos - 20, 40, 40);  //when germ is hit
           scene1.toothbrush_follow();
         }
       }
@@ -282,12 +283,11 @@ void keyPressed(){
         image(scene1.background, 0, 0, width, height);
         scene1.timer();
         stroke(1);
-        fill(255);
-        ellipse(scene1.xpos, scene1.ypos, 20, 20);  //when germ is dead
+        image(scene1.dead, scene1.xpos - 20, scene1.ypos - 20, 40, 40);  //when germ dead
         noStroke();
         scene1.germ_exist = true;
-        scene1.success = scene1.success + 1;
-        println("success : " + scene1.success);
+        scene1.success = scene1.success + 1;  //check success times
+        //println("success : " + scene1.success);
        }
        if (scene1.success == 5) {
          movestory2 = true;
