@@ -12,6 +12,7 @@ Scene3Story scene3story;
 Scene1 scene1;
 Scene2 scene2;
 Scene3 scene3;
+EndingScene endingscene;
 
 /* temporary variables for moving to other stage */
 boolean move0;
@@ -23,6 +24,7 @@ boolean movestory3;
 boolean move1;
 boolean move2;
 boolean move3;
+boolean moveending;
 
 boolean objMoveRight;
 boolean objMoveLeft;
@@ -50,6 +52,7 @@ void setup(){
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
+  endingscene = new EndingScene();
   move0 = true;
   movecredit = false;
   movestory = false;
@@ -81,6 +84,9 @@ void draw(){
     scene3story.drawScene3Story();
     move2 = false;
     }
+    if(moveending == true){
+      endingscene.drawEndingScene();
+    }
   if(move1 == true){
     scene1.drawScene1();
   }
@@ -89,7 +95,7 @@ void draw(){
     scene2.drawScene2();
     if(scene2.scene2Checking == 3){
       move2 = false;
-      move3 = true;
+      movestory3 = true;
     }
   }
   if(move3 == true){

@@ -73,10 +73,12 @@ class Scene3{
       ms --;
       
     }else{ //시간이 끝났을 때
-       background(0); //배경 변환
+      /* background(0); //배경 변환
        fill(255); //글씨 색
        textSize(50); //글씨 크기
-       text("Arrive!",370,height/2); //도착했다는 문구 출력
+       text("Arrive!",370,height/2); //도착했다는 문구 출력*/
+       move3 = false;
+       moveending = true;
     }
   }
   
