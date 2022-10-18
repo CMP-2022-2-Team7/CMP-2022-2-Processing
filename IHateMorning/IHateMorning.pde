@@ -19,6 +19,11 @@ boolean movestory1;
 boolean move1;
 boolean move2;
 boolean move3;
+
+boolean objMoveRight;
+boolean objMoveLeft;
+
+float volume = 1.0;
  
   
 void setup(){
@@ -47,7 +52,9 @@ void setup(){
   move3 = false;
 }
 void draw(){
+
   textFont(font,50);
+  
   if(move0 == true){
     lobbyUI.drawLobby();
   }
@@ -68,6 +75,16 @@ void draw(){
     scene2.drawScene2();
   }
   if(move3 == true){
+    if(objMoveRight == true){
+      if(scene3.obj.x <= 700){
+        scene3.obj.x += 3;
+      }
+    }
+    if(objMoveLeft == true){
+      if(scene3.obj.x >= 20){
+        scene3.obj.x -= 3;
+      }
+    }
     scene3.drawScene3();
   }
 }
@@ -220,16 +237,31 @@ void keyPressed(){
   if(move3 == true){
     if(key == CODED){
       if(keyCode == RIGHT){
-        if(scene3.obj.x <= 700){
-          scene3.obj.x += 20;
-        }
-        image(scene3.background,0,0,width,height);
+        objMoveRight = true;
       }else if(keyCode == LEFT){
-        if(scene3.obj.x >= 20){
-          scene3.obj.x -= 20;
-        }
-        image(scene3.background,0,0,width,height);
+        objMoveLeft = true;
       }
     }
   }
+}
+
+void keyReleased(){
+  if(keyCode == RIGHT){
+    objMoveRight = false;
+  }
+  if(keyCode == LEFT){
+    objMoveLeft = false;
+  }
+}
+
+void mouseDragged(){
+//constrain(soundscene.a,250,630);
+settingscene.a = mouseX;
+if(settingscene.a>620){
+settingscene.a = 620;
+}else if(settingscene.a<250){
+settingscene.a = 270;
+}
+volume = settingscene.sound ;
+ 
 }
