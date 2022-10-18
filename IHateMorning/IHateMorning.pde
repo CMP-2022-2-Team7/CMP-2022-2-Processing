@@ -7,30 +7,39 @@ LobbyUI lobbyUI;
 CreditScene creditscene;
 StoryScene storyscene;
 Scene1Story scene1story;
+Scene2Story scene2story;
+Scene3Story scene3story;
 Scene1 scene1;
 Scene2 scene2;
 Scene3 scene3;
+EndingScene endingscene;
 
 /* temporary variables for moving to other stage */
 boolean move0;
 boolean movecredit;
 boolean movestory;
 boolean movestory1;
+boolean movestory2;
+boolean movestory3;
 boolean move1;
 boolean move2;
 boolean move3;
+boolean moveending;
 
 boolean objMoveRight;
 boolean objMoveLeft;
 
 float volume = 1.0;
- 
-  
+
+
 void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
   bgm1 = new SoundFile(this, "p-20-122596.mp3");
-  bgm.play();
+  bgm1.loop();
+
+ 
+
 
   //temporary font
   font = loadFont("FreestyleScript-Regular-48.vlw");
@@ -41,9 +50,12 @@ void setup(){
   creditscene = new CreditScene();
   storyscene = new StoryScene();
   scene1story = new Scene1Story();
+  scene2story = new Scene2Story();
+  scene3story = new Scene3Story();
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
+  endingscene = new EndingScene();
   move0 = true;
   movecredit = false;
   movestory = false;
@@ -54,7 +66,7 @@ void setup(){
 void draw(){
 
   textFont(font,50);
-  
+
   if(move0 == true){
     lobbyUI.drawLobby();
   }
@@ -67,6 +79,17 @@ void draw(){
   if(movestory1 == true){
     scene1story.drawScene1Story();
   }
+     if(movestory2 == true){
+    scene2story.drawScene2Story();
+    move1 = false;
+  }
+    if(movestory3 == true){
+    scene3story.drawScene3Story();
+    move2 = false;
+    }
+    if(moveending == true){
+      endingscene.drawEndingScene();
+    }
   if(move1 == true){
     scene1.drawScene1();
   }
@@ -75,7 +98,7 @@ void draw(){
     scene2.drawScene2();
     if(scene2.scene2Checking == 3){
       move2 = false;
-      move3 = true;
+      movestory3 = true;
     }
   }
   if(move3 == true){
@@ -109,9 +132,9 @@ void mousePressed(){
     if(lobbyUI.checkClick()){
       lobbyUI.changeSoundImg();
       if(lobbyUI.soundStatus == true){
-        bgm.play();
+        bgm1.play();
       }else if(lobbyUI.soundStatus == false){
-      bgm.pause();}
+      bgm1.pause();}
     }
   }
 
@@ -130,16 +153,37 @@ void mousePressed(){
      movestory1 = true;
    }
   }
+  
+  if(moveending == true){
+     if(endingscene.endButton.checkClick()){
+      moveending = false;
+      movestory = false;
+      move0 = true;
+    }
+  }
 
 
  if(movestory1 == true){
-    if(scene1story.goButton.checkClick()){
-    background(255);
+   if(scene1story.goButton.checkClick()){
+    movestory1 = false;
+    move1 = true;
    }}
-
+ if(movestory2 == true){
+    if(scene2story.goButton.checkClick()){
+    movestory2 = false;
+    move2 = true;
+   }}
+    if(movestory3 == true){
+    if(scene3story.goButton.checkClick()){
+    movestory3 = false;
+    move3 = true;
+   }}
    
+   
+
+
   if(move2 == true){
-    if(scene2.phase1){
+    if(scene2.phase1 || scene2.phase3){
       if(scene2.ingredientButton1.checkClick()){
         scene2.button1Clicked = true;
         scene2.button2Clicked = false;
@@ -159,15 +203,18 @@ void mousePressed(){
         scene2.pickCategory();
       }
     }
-    else if(scene2.phase2){
+    else if(scene2.phase2 || scene2.phase3){
       if(scene2.yesButton.checkClick()){
-        scene2.phase1 = true;
+        //scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = true;
         scene2.scene2Checking++;
       }
       else if(scene2.noButton.checkClick()){
         scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = false;
+        scene2.phase4 = true;
       }
     }
   }
@@ -231,13 +278,11 @@ void keyPressed(){
     if(keyCode == ' ') {
       if(mouseX >= scene1.xpos - 12.5 && mouseX <= scene1.xpos + 12.5) {
         if (mouseY >= scene1.ypos - 12.5 && mouseY <= scene1.ypos + 12.5) {
-          scene1.hp = scene1.hp - 1;
-          println("hp = " + scene1.hp);
+          scene1.hp = scene1.hp - 1;  //check germ's hp
+          //println("hp = " + scene1.hp);
           image(scene1.background, 0, 0, width, height);
           scene1.timer();
-          fill(0);
-          ellipse(scene1.xpos, scene1.ypos, 20, 20);
-          fill(150);
+          image(scene1.ouch, scene1.xpos - 20, scene1.ypos - 20, 40, 40);  //when germ is hit
           scene1.toothbrush_follow();
         }
       }
@@ -246,15 +291,14 @@ void keyPressed(){
         image(scene1.background, 0, 0, width, height);
         scene1.timer();
         stroke(1);
-        fill(255);
-        ellipse(scene1.xpos, scene1.ypos, 20, 20);  //when germ is dead
+        image(scene1.dead, scene1.xpos - 20, scene1.ypos - 20, 40, 40);  //when germ dead
         noStroke();
         scene1.germ_exist = true;
-        scene1.success = scene1.success + 1;
-        println("success : " + scene1.success);
+        scene1.success = scene1.success + 1;  //check success times
+        //println("success : " + scene1.success);
        }
        if (scene1.success == 5) {
-         move2 = true;
+         movestory2 = true;
          println("STAGE 2"); //move to stage 2
          scene1.germ_exist = false;
          scene1.timer = false;
