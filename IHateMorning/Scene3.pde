@@ -1,4 +1,6 @@
+
 class Scene3{
+
   object obj;
   Obstacle Obs1_professor;
   Obstacle Obs2_1_student;

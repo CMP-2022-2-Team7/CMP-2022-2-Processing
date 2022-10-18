@@ -1,14 +1,10 @@
 class CreditScene{
- PImage creditImg;
- PFont font;
-  
+  PImage creditImg;
   Button backButton;
   String back = "BACK";
   
   CreditScene(){
-    font = loadFont("FreestyleScript-Regular-48.vlw");
     creditImg = loadImage("board.png");
-    textFont(font,5);
     backButton = new Button(45, 42, 55, 40, back);
     backButton.setTexetSize(20);
     backButton.setTextR(0);

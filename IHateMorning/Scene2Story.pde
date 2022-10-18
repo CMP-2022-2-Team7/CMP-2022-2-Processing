@@ -18,7 +18,7 @@ class Scene2Story{
 
   void drawScene2Story(){
   background(255);
-  image(storyImg,500,250,210,210);
+ /* image(storyImg,500,250,210,210);*/
   fill(0);
   textSize(35);
   text("Scene2Story", width/2, 180);

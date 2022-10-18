@@ -1,5 +1,7 @@
 import processing.sound.*;
 SoundFile bgm;
+SoundFile bgm1;
+PFont font;
 
 LobbyUI lobbyUI;
 CreditScene creditscene;
@@ -17,11 +19,16 @@ boolean movestory1;
 boolean move1;
 boolean move2;
 boolean move3;
-
+ 
+  
 void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+  bgm1 = new SoundFile(this, "p-20-122596.mp3");
   bgm.play();
+
+  //temporary font
+  font = loadFont("FreestyleScript-Regular-48.vlw");
   
   size(800, 450);
 
@@ -40,6 +47,7 @@ void setup(){
   move3 = false;
 }
 void draw(){
+  textFont(font,50);
   if(move0 == true){
     lobbyUI.drawLobby();
   }
@@ -98,6 +106,8 @@ void mousePressed(){
       move0 = true;
       movestory = false; 
     }else if(storyscene.goButton.checkClick()){
+      bgm.pause();
+      bgm1.play();
      movestory = false;
      movestory1 = true;
    }
