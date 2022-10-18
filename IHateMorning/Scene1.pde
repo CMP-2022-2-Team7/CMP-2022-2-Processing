@@ -13,6 +13,7 @@ class Scene1{
   boolean germ_exist = false;
   boolean timer = false;
   boolean click = true;  //front side toothbrush not appear again
+  boolean stop = false; //when game over, follow stop
   int timeLimit = 450;
   int hp = 5;
   int success = 0;
@@ -32,11 +33,14 @@ class Scene1{
     image(backgroundZero, 0, 0, width, height);  //face that before brushing
     image(toothbrush, 650, 350);  //toothbrush case image
     if (brush == true) {  //brushing & timer start & germ create
+     stop = true;
      if (germ_exist == true) {
        germ_ex();  //start to form germ
      }
      timer();
-     toothbrush_follow();
+     if(stop == true){
+     brush_ex();  //toothbrush follows
+     }
   }
   if (pick == true) {  //pick toothbrush
     brush = true;
@@ -44,6 +48,12 @@ class Scene1{
     pick = false;
   }
   timeLimit--;
+  }
+  
+  void brush_ex() {
+    if(stop == true) {
+      toothbrush_follow();
+    }
   }
 
   void germ_ex() {
@@ -54,7 +64,7 @@ class Scene1{
 }
 
 void toothbrush_follow() {  //image of toothbrush is following
-  image(Tbrush, xposT - 100, yposT - 100, 200, 200);
+  image(Tbrush, xposT - 100, yposT - 50, 150, 150);
   xposT = lerp(xposT, mouseX, 1);
   yposT = lerp(yposT, mouseY, 1);
 }
@@ -74,10 +84,14 @@ void toothbrush_follow() {  //image of toothbrush is following
     textSize(40);
     text("Remaining Time : " + timeLimit / 30, 380, 40);
   } else {
-    background(0);
+    stop = false;
+  /*  background(0);
     fill(255);
     textSize(100);
-    text("GAME OVER", 380, 260);  //move to game over scene
+    text("GAME OVER", 380, 260);  //move to game over scene*/
+    move1 = false;
+    endingscene.endText = "GAME OVER";
+    moveending = true;
   }
 }
 }

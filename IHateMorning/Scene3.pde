@@ -8,8 +8,8 @@ class Scene3{
   Obstacle obs4Dog;
   
   
-  int timeLimit = 30; //시간 범위
-  int ms = 1800; //현재 시간
+  int timeLimit = 10; //시간 범위
+  int ms = 180; //현재 시간
   
   
   ArrayList<Life> lifeSystem; //생명시스템 배열

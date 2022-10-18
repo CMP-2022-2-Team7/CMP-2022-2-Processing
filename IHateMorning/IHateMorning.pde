@@ -153,6 +153,14 @@ void mousePressed(){
      movestory1 = true;
    }
   }
+  
+  if(moveending == true){
+     if(endingscene.endButton.checkClick()){
+      moveending = false;
+      movestory = false;
+      move0 = true;
+    }
+  }
 
 
  if(movestory1 == true){
