@@ -24,8 +24,8 @@ boolean objMoveRight;
 boolean objMoveLeft;
 
 float volume = 1.0;
- 
-  
+
+
 void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
@@ -54,7 +54,7 @@ void setup(){
 void draw(){
 
   textFont(font,50);
-  
+
   if(move0 == true){
     lobbyUI.drawLobby();
   }
@@ -137,9 +137,9 @@ void mousePressed(){
     background(255);
    }}
 
-   
+
   if(move2 == true){
-    if(scene2.phase1){
+    if(scene2.phase1 || scene2.phase3){
       if(scene2.ingredientButton1.checkClick()){
         scene2.button1Clicked = true;
         scene2.button2Clicked = false;
@@ -159,15 +159,18 @@ void mousePressed(){
         scene2.pickCategory();
       }
     }
-    else if(scene2.phase2){
+    else if(scene2.phase2 || scene2.phase3){
       if(scene2.yesButton.checkClick()){
-        scene2.phase1 = true;
+        //scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = true;
         scene2.scene2Checking++;
       }
       else if(scene2.noButton.checkClick()){
         scene2.phase1 = true;
         scene2.phase2 = false;
+        scene2.phase3 = false;
+        scene2.phase4 = true;
       }
     }
   }
