@@ -233,13 +233,22 @@ void keyPressed(){
         if (mouseY >= scene1.ypos - 12.5 && mouseY <= scene1.ypos + 12.5) {
           scene1.hp = scene1.hp - 1;
           println("hp = " + scene1.hp);
+          image(scene1.background, 0, 0, width, height);
+          scene1.timer();
+          fill(0);
+          ellipse(scene1.xpos, scene1.ypos, 20, 20);
+          fill(150);
+          scene1.toothbrush_follow();
         }
       }
       if (scene1.hp == 0) {
         scene1.hp = 5;
-        background(255);
         image(scene1.background, 0, 0, width, height);
         scene1.timer();
+        stroke(1);
+        fill(255);
+        ellipse(scene1.xpos, scene1.ypos, 20, 20);  //when germ is dead
+        noStroke();
         scene1.germ_exist = true;
         scene1.success = scene1.success + 1;
         println("success : " + scene1.success);

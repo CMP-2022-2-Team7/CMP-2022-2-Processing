@@ -1,6 +1,7 @@
 class Scene1{
   PImage background;
   PImage toothbrush;
+  PImage Tbrush;  //toothbrush while brushing
   float xposT, yposT;  //toothbrush position
   float xpos, ypos;  //germ position
   boolean brush = false;
@@ -8,16 +9,15 @@ class Scene1{
   boolean germ_exist = false;
   boolean timer = false;
   boolean click = true;  //front side toothbrush not appear again
-  int timeLimit = 30;  //**timer will only start when 'brush' turned true but start when game is started
-  int countDown;
+  int timeLimit = 1800;
   int hp = 5;
   int success = 0;
-  int ms;
 
   Scene1(){
     //basic setting
     background = loadImage("face.jpg");
     toothbrush = loadImage("toothbrush.png");
+    Tbrush = loadImage("brush.png");
   }
 
   void drawScene1(){
@@ -28,16 +28,16 @@ class Scene1{
        println("germ_exist is true");
        germ_ex();
      }
-    toothbrush_follow();  //**not following -> need fixing
-    timer();
+     timer();
+     toothbrush_follow();
   }
   if (pick == true) {  //pick toothbrush
     println("Let's Start!");
-    toothbrush_follow();
     brush = true;
     germ_exist = true;
     pick = false;
   }
+  timeLimit--;
   }
 
   void germ_ex() {
@@ -48,6 +48,7 @@ class Scene1{
 }
 
 void toothbrush_follow() {
+  image(Tbrush, xposT - 100, yposT - 100, 200, 200);
   xposT = lerp(xposT, mouseX, 1);
   yposT = lerp(yposT, mouseY, 1);
 }
@@ -62,16 +63,13 @@ void toothbrush_follow() {
   }
 
   void timer() {
-    //println("Timer Start");
-  ms = millis() / 1000;
-  countDown = timeLimit - ms;
-  if (countDown > 0) {
+  if (timeLimit > 0) {
     image(background, 0, 0, width, height);
     fill(150);
     ellipse(xpos, ypos, 25, 25);
     fill(0);
     textSize(20);
-    text("Remaining Time : " + countDown, 380, 40);
+    text("Remaining Time : " + timeLimit / 60, 380, 40);
   } else {
     background(0);
     fill(255);
