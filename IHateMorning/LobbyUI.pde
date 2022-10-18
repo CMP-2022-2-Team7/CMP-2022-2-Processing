@@ -32,7 +32,7 @@ class LobbyUI{
     startButton.setTextB(255);
     startButton.setTextPositionX(width/2);
     startButton.setTextPositionY(360-titleMoving);
-    
+
     startSizeX = 400;
     startSizeY = 80;
     startPositionX = width/2-200;
@@ -44,7 +44,7 @@ class LobbyUI{
     creditButton.setTextB(255);
     creditButton.setTextPositionX(width/2);
     creditButton.setTextPositionY(460-titleMoving);
-    
+
     startSizeX = 400;
     startSizeY = 80;
     startPositionX = width/2-200;
@@ -57,7 +57,7 @@ class LobbyUI{
     settingButton.setTextPositionX(width/2);
     settingButton.setTextPositionY(560-titleMoving);
   }
-  
+
   void drawLobby(){
     /* clear sceen */
     background(135, 206, 235);
@@ -71,12 +71,12 @@ class LobbyUI{
     startButton.drawButton();
     startButton.setButtonPositionY(startPositionY);
     startButton.setTextPositionY(startPositionY+60);
-    
+
     startPositionY = 350-titleMoving;
     creditButton.drawButton();
     creditButton.setButtonPositionY(startPositionY);
     creditButton.setTextPositionY(startPositionY+60);
-    
+
     startPositionY = 450-titleMoving;
     settingButton.drawButton();
     settingButton.setButtonPositionY(startPositionY);

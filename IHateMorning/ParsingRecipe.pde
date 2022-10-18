@@ -18,7 +18,7 @@ class ParsingRecipe{
     int random;
     String[] tmpDishNameList;
     ArrayList<Character> charArrayList;
-    dishNameList.clear();
+    dishNameList.clear(); 
     for(TableRow row : table.rows()){
       charArrayList = new ArrayList<Character>();
       if(row.getString("유형분류").equals(category)){

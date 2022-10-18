@@ -63,6 +63,10 @@ void draw(){
   /* when '2' is pressed, move to stage 2 */
   if(move2 == true){
     scene2.drawScene2();
+    if(scene2.scene2Checking == 3){
+      move2 = false;
+      move3 = true;
+    }
   }
   if(move3 == true){
     scene3.drawScene3();
@@ -106,26 +110,36 @@ void mousePressed(){
    }
   }
   if(move2 == true){
-    if(scene2.ingredientButton1.checkClick()){
-      background(0);
-      scene2.button1Clicked = true;
-      scene2.button2Clicked = false;
-      scene2.button3Clicked = false;
-      scene2.pickDish();
+    if(scene2.phase1){
+      if(scene2.ingredientButton1.checkClick()){
+        scene2.button1Clicked = true;
+        scene2.button2Clicked = false;
+        scene2.button3Clicked = false;
+        scene2.pickCategory();
+      }
+      else if(scene2.ingredientButton2.checkClick()){
+        scene2.button1Clicked = false;
+        scene2.button2Clicked = true;
+        scene2.button3Clicked = false;
+        scene2.pickCategory();
+      }
+      else if(scene2.ingredientButton3.checkClick()){
+        scene2.button1Clicked = false;
+        scene2.button2Clicked = false;
+        scene2.button3Clicked = true;
+        scene2.pickCategory();
+      }
     }
-    else if(scene2.ingredientButton2.checkClick()){
-      background(0);
-      scene2.button1Clicked = false;
-      scene2.button2Clicked = true;
-      scene2.button3Clicked = false;
-      scene2.pickDish();
-    }
-    else if(scene2.ingredientButton3.checkClick()){
-      background(0);
-      scene2.button1Clicked = false;
-      scene2.button2Clicked = false;
-      scene2.button3Clicked = true;
-      scene2.pickDish();
+    else if(scene2.phase2){
+      if(scene2.yesButton.checkClick()){
+        scene2.phase1 = true;
+        scene2.phase2 = false;
+        scene2.scene2Checking++;
+      }
+      else if(scene2.noButton.checkClick()){
+        scene2.phase1 = true;
+        scene2.phase2 = false;
+      }
     }
   }
 }
