@@ -104,16 +104,12 @@ void mousePressed(){
       movecredit = false;
     }
   }
-<<<<<<< HEAD
-
-=======
   if(movesetting == true){
   if(settingscene.backButton.checkClick()){
       move0 = true;
       movesetting = false;
     }
   }
->>>>>>> feature/stage2-calorie-calculate
   if(movestory == true){
    if(storyscene.backButton.checkClick()){
       move0 = true;
@@ -256,8 +252,6 @@ void keyPressed(){
     }
   }
 }
-<<<<<<< HEAD
-=======
 void mouseDragged(){
 //constrain(soundscene.a,250,630);
 settingscene.a = mouseX;
@@ -269,4 +263,3 @@ settingscene.a = 270;
 volume = settingscene.sound ;
 
 }
->>>>>>> feature/stage2-calorie-calculate
