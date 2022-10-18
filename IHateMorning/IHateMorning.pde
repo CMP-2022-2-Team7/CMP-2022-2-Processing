@@ -271,15 +271,3 @@ void keyReleased(){
     objMoveLeft = false;
   }
 }
-
-void mouseDragged(){
-//constrain(soundscene.a,250,630);
-settingscene.a = mouseX;
-if(settingscene.a>620){
-settingscene.a = 620;
-}else if(settingscene.a<250){
-settingscene.a = 270;
-}
-volume = settingscene.sound ;
- 
-}
