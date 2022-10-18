@@ -52,7 +52,7 @@ class Button{
     text(getText(), getTextPositionX(), getTextPositionY());
 
     /* set default color to white */
-    fill(255);
+    //fill(255);
   }
 
   /* return true if mouse is on the button */

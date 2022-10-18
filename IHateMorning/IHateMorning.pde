@@ -19,8 +19,8 @@ boolean movestory1;
 boolean move1;
 boolean move2;
 boolean move3;
- 
-  
+
+
 void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
@@ -29,7 +29,7 @@ void setup(){
 
   //temporary font
   font = loadFont("FreestyleScript-Regular-48.vlw");
-  
+
   size(800, 450);
 
   lobbyUI = new LobbyUI();
@@ -66,6 +66,10 @@ void draw(){
   /* when '2' is pressed, move to stage 2 */
   if(move2 == true){
     scene2.drawScene2();
+    if(scene2.scene2Checking == 3){
+      move2 = false;
+      move3 = true;
+    }
   }
   if(move3 == true){
     scene3.drawScene3();
@@ -74,37 +78,46 @@ void draw(){
 
 void mousePressed(){
   if(move0 == true){
-     // if mouse is on start button, can click it 
+     // if mouse is on start button, can click it
     if(lobbyUI.startButton.checkClick()){
       move0 = false;
       movestory = true;
     }
-     // if mouse is on credit button, can click it 
+     // if mouse is on credit button, can click it
     if(lobbyUI.creditButton.checkClick()){
       move0 = false;
       movecredit = true;
     }
-    // if mouse is on sound image, can click it 
+    // if mouse is on sound image, can click it
     if(lobbyUI.checkClick()){
-      lobbyUI.changeSoundImg(); 
+      lobbyUI.changeSoundImg();
       if(lobbyUI.soundStatus == true){
         bgm.play();
       }else if(lobbyUI.soundStatus == false){
       bgm.pause();}
     }
   }
-  
+
   if(movecredit == true){
    if(creditscene.backButton.checkClick()){
       move0 = true;
-      movecredit = false; 
+      movecredit = false;
     }
   }
-  
+<<<<<<< HEAD
+
+=======
+  if(movesetting == true){
+  if(settingscene.backButton.checkClick()){
+      move0 = true;
+      movesetting = false;
+    }
+  }
+>>>>>>> feature/stage2-calorie-calculate
   if(movestory == true){
    if(storyscene.backButton.checkClick()){
       move0 = true;
-      movestory = false; 
+      movestory = false;
     }else if(storyscene.goButton.checkClick()){
       bgm.pause();
       bgm1.play();
@@ -112,28 +125,38 @@ void mousePressed(){
      movestory1 = true;
    }
   }
-  
+
   if(move2 == true){
-    if(scene2.ingredientButton1.checkClick()){
-      background(0);
-      scene2.button1Clicked = true;
-      scene2.button2Clicked = false;
-      scene2.button3Clicked = false;
-      scene2.pickDish();
+    if(scene2.phase1){
+      if(scene2.ingredientButton1.checkClick()){
+        scene2.button1Clicked = true;
+        scene2.button2Clicked = false;
+        scene2.button3Clicked = false;
+        scene2.pickCategory();
+      }
+      else if(scene2.ingredientButton2.checkClick()){
+        scene2.button1Clicked = false;
+        scene2.button2Clicked = true;
+        scene2.button3Clicked = false;
+        scene2.pickCategory();
+      }
+      else if(scene2.ingredientButton3.checkClick()){
+        scene2.button1Clicked = false;
+        scene2.button2Clicked = false;
+        scene2.button3Clicked = true;
+        scene2.pickCategory();
+      }
     }
-    else if(scene2.ingredientButton2.checkClick()){
-      background(0);
-      scene2.button1Clicked = false;
-      scene2.button2Clicked = true;
-      scene2.button3Clicked = false;
-      scene2.pickDish();
-    }
-    else if(scene2.ingredientButton3.checkClick()){
-      background(0);
-      scene2.button1Clicked = false;
-      scene2.button2Clicked = false;
-      scene2.button3Clicked = true;
-      scene2.pickDish();
+    else if(scene2.phase2){
+      if(scene2.yesButton.checkClick()){
+        scene2.phase1 = true;
+        scene2.phase2 = false;
+        scene2.scene2Checking++;
+      }
+      else if(scene2.noButton.checkClick()){
+        scene2.phase1 = true;
+        scene2.phase2 = false;
+      }
     }
   }
 }
@@ -233,3 +256,17 @@ void keyPressed(){
     }
   }
 }
+<<<<<<< HEAD
+=======
+void mouseDragged(){
+//constrain(soundscene.a,250,630);
+settingscene.a = mouseX;
+if(settingscene.a>620){
+settingscene.a = 620;
+}else if(settingscene.a<250){
+settingscene.a = 270;
+}
+volume = settingscene.sound ;
+
+}
+>>>>>>> feature/stage2-calorie-calculate
