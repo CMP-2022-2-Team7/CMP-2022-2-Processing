@@ -6,14 +6,14 @@ class Scene1Story{
   Scene1Story(){
     story1Img = loadImage("board.png");
     
-    goButton = new Button(378,380,55,40,go); 
+    goButton = new Button(700,42,55,40,go); 
     
     goButton.setTexetSize(28);
     goButton.setTextR(0);
     goButton.setTextG(0);
     goButton.setTextB(0);
-    goButton.setTextPositionX(406);
-    goButton.setTextPositionY(406);
+    goButton.setTextPositionX(728);
+    goButton.setTextPositionY(71);
   }
 
   void drawScene1Story(){
