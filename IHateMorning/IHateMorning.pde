@@ -80,12 +80,12 @@ void draw(){
   }
   if(move3 == true){
     if(objMoveRight == true){
-      if(scene3.obj.x <= 700){
+      if(scene3.obj.x <= 600){
         scene3.obj.x += 3;
       }
     }
     if(objMoveLeft == true){
-      if(scene3.obj.x >= 20){
+      if(scene3.obj.x >= 120){
         scene3.obj.x -= 3;
       }
     }

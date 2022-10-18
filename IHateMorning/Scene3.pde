@@ -1,4 +1,3 @@
-
 class Scene3{
   Object obj;
   Obstacle obs1Professor;
@@ -6,6 +5,7 @@ class Scene3{
   Obstacle obs2Student2;
   Obstacle obs3Bicycle;
   Obstacle obs4Dog;
+  Obstacle obs5Ball;
   
   
   int timeLimit = 30; //시간 범위
@@ -21,6 +21,9 @@ class Scene3{
   boolean hitStudent2 = false;
   boolean hitBicycle = false;
   boolean hitDog = false;
+  boolean hitBall = false;
+  
+  //라이프 존재 여부
   boolean lifeis = false;
   
   PImage background;
@@ -30,10 +33,11 @@ class Scene3{
     //객체 생성
     obj = new Object();
     obs1Professor = new Obstacle("professor");
-    obs2Student1 = new Obstacle("student");
-    obs2Student2 = new Obstacle("student");
+    obs2Student1 = new Obstacle("student1");
+    obs2Student2 = new Obstacle("student2");
     obs3Bicycle = new Obstacle("bicycle");
     obs4Dog = new Obstacle("dog");
+    obs5Ball = new Obstacle("ball");
     
       
     lifeSystem = new ArrayList<Life>();
@@ -41,7 +45,7 @@ class Scene3{
     lifeSystem.add(new Life(45));
     lifeSystem.add(new Life(70));
       
-    background = loadImage("background.jpg");
+    background = loadImage("background_road.png");
   }
   
   void drawScene3(){
@@ -53,7 +57,7 @@ class Scene3{
     
     //시간 출력
       image(background,0,0,width,height);
-      textSize(20);
+      textSize(40);
       text("Time Remaining to Destination : ",385,30);
       fill(255,0,0);
       text(ms/60, 550,31);
@@ -82,48 +86,57 @@ class Scene3{
   
   //충돌 체크
   void CheckCollision(){
-  if(obs1Professor.y > obj.y - 10){
-    if(obs1Professor.x > obj.x - 30 && obs1Professor.x < obj.x + 30){
+  if(obs1Professor.y > obj.y - 70 && obs1Professor.y < obj.y + 70){
+    if(obs1Professor.x > obj.x - 30 && obs1Professor.x < obj.x + 70){
       hitProfessor = true;
-      obs1Professor.y = 0;
-      obs1Professor.x = random(50,750);
+      obs1Professor.y = -300;
+      obs1Professor.x = random(100,600);
       println("hit_pro");
     }
   }
   
-  if(obs2Student1.y > obj.y - 10){
-    if(obs2Student1.x > obj.x - 30 && obs2Student1.x < obj.x + 30){
+  if(obs2Student1.y > obj.y - 70 && obs2Student1.y < obj.y + 70){
+    if(obs2Student1.x > obj.x - 30 && obs2Student1.x < obj.x + 70){
       hitStudent1 = true;
-      obs2Student1.y = 0;
-      obs2Student1.x = random(50,750);
+      obs2Student1.y = -300;
+      obs2Student1.x = random(100,600);
       println("hit_stu1");
     }
   }
   
-  if(obs2Student2.y > obj.y - 10){
-    if(obs2Student2.x > obj.x - 30 && obs2Student2.x < obj.x + 30){
+  if(obs2Student2.y > obj.y - 100 && obs2Student2.y < obj.y + 50){
+    if(obs2Student2.x > obj.x - 70 && obs2Student2.x < obj.x + 30){
       hitStudent2 = true;
-      obs2Student2.y = 0;
-      obs2Student2.x = random(50,750);
+      obs2Student2.y = -300;
+      obs2Student2.x = random(100,600);
       println("hit_stu2");
     }
   }
   
-  if(obs3Bicycle.y > obj.y - 50){
-    if(obs3Bicycle.x > obj.x -25 && obs3Bicycle.x < obj.x + 30){
+  if(obs3Bicycle.y > obj.y - 100 && obs3Bicycle.y < obj.y + 50){
+    if(obs3Bicycle.x > obj.x -40 && obs3Bicycle.x < obj.x + 60){
       hitBicycle = true;
-      obs3Bicycle.y = 0;
-      obs3Bicycle.x = random(50,750);
+      obs3Bicycle.y = -300;
+      obs3Bicycle.x = random(100,600);
       println("hit_bi");
     }
   }
   
-  if(obs4Dog.y > obj.y - 10){
-    if(obs4Dog.x > obj.x - 25 && obs4Dog.x < obj.x + 25){
+  if(obs4Dog.y > obj.y - 50 && obs4Dog.y < obj.y + 50){
+    if(obs4Dog.x > obj.x - 45 && obs4Dog.x < obj.x + 70){
       hitDog = true;
-      obs4Dog.y = 0;
-      obs4Dog.x = random(50,750);
+      obs4Dog.y = -300;
+      obs4Dog.x = random(100,600);
       println("hit_dog");
+    }
+  }
+  
+  if(obs5Ball.y > obj.y - 50 && obs5Ball.y < obj.y + 50){
+    if(obs5Ball.x > obj.x - 45 && obs5Ball.x < obj.x + 70){
+      hitBall = true;
+      obs5Ball.y = -300;
+      obs5Ball.x = random(100,600);
+      println("hit_ball");
     }
   }
 }
@@ -132,11 +145,12 @@ class Scene3{
   void collision(){
   if(lifeSystem.size() > 0){
       
-      obs1Professor.moveObstacle(2);
-      obs2Student1.moveObstacle(3);
-      obs2Student2.moveObstacle(4);
-      obs3Bicycle.moveObstacle(5);
-      obs4Dog.moveObstacle(3.5);
+      obs1Professor.moveObstacle();
+      obs2Student1.moveObstacle();
+      obs2Student2.moveObstacle();
+      obs3Bicycle.moveObstacle();
+      obs4Dog.moveObstacle();
+      obs5Ball.moveObstacle();
       obj.drawObject();
       
       
@@ -232,13 +246,33 @@ class Scene3{
           obj.drawEffect();
           
         }
-        obj.drawEffect();
+        //공이랑 충돌할 때
+      }else if(hitBall == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitBall = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitBall = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitBall = false;
+          obj.drawEffect();
+          
+        }
       }
     }else{
         background(0); //게임 오버 화면 변환
         fill(255);
+        textSize(100);
         text("Game Over",400,height/2);
         delay(100); //딜레이
-    }
-  } 
+      }
+  }
+  
+  
 }

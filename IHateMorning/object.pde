@@ -6,8 +6,8 @@ class Object{
   
   Object(){
     x = width/2;
-    y = height/2 + 100;
-    objImage = loadImage("bag_man.png");
+    y = height/2 + 130;
+    objImage = loadImage("player.png");
     effect = loadImage("effect.png");
     
   }

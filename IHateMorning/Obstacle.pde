@@ -1,34 +1,45 @@
 class Obstacle{
   
-  //int direction;
   float x,y = 0;
+  float speed;
+  
   PImage image;
   
   Obstacle(String i){
-    x = int(random(50,750));
-    y = 100;
+    x = int(random(100,600));
+    y = -300;
 
     if(i == "professor"){
-      image = loadImage("professor.png");
-    }else if(i == "student"){
-      image = loadImage("student.png");
+      image = loadImage("man_professor.png");
+      speed = 2;
+    }else if(i == "student1"){
+      image = loadImage("girl.png");
+      speed = 3;
+    }else if(i == "student2"){
+      image = loadImage("boy.png");
+      speed = 4.2;
     }else if(i == "bicycle"){
       image = loadImage("bicycle.png");
+      speed = 5;
     }else if(i == "dog"){
-      image = loadImage("dog.png");
+      image = loadImage("brown_dog.png");
+      speed = 3.4;
+    }else if(i == "ball"){
+      image = loadImage("ball.png");
+      speed = 3.8;
     }
     
     
   }
   
   //충돌물 움직임
-  void moveObstacle(float speed){
+  void moveObstacle(){
     image(image,x,y);
     if(y <= 500){
       y += speed;
     }else{
-      x = int(random(50,750));
-      y = 0;
+      x = int(random(100,600));
+      y = -300;
     }
   }
 }
