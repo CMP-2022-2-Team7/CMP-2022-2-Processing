@@ -106,12 +106,17 @@ void mousePressed(){
       move0 = true;
       movestory = false; 
     }else if(storyscene.goButton.checkClick()){
-      bgm.pause();
-      bgm1.play();
      movestory = false;
      movestory1 = true;
    }
   }
+  
+ if(movestory1 == true){
+    if(scene1story.goButton.checkClick()){
+    background(255);
+   }}
+
+   
   
   if(move2 == true){
     if(scene2.ingredientButton1.checkClick()){

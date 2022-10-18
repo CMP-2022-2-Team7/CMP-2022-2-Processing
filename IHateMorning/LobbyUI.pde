@@ -4,7 +4,7 @@ PImage nosoundImg;
 
 class LobbyUI{
   boolean soundStatus = true; // background music status
-  String title = "I HATE MORNIG"; // game title text
+  String title = "I     H A T E     M O R N I G"; // game title text
   String start = "START"; // start button text
   String credit = "CREDIT"; // credit button text
   int titleMoving = 0;  // variable for title, button's movement
