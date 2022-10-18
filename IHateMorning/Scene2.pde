@@ -26,6 +26,7 @@ class Scene2{
 
   /* Dish button */
   Button dishButton;
+  Button calorieButton;
 
   /* Variable for print dish name */
   boolean setCategory;
@@ -70,9 +71,15 @@ class Scene2{
     ingredientButton3.setTexetSize(30);
 
     /* generate result button and set specification */
-    dishButton = new Button(width/2-300, 90, 600, 100, "button1 clicked");
-    dishButton.setTextPositionX(width/2);
-    dishButton.setTextPositionY(150);
+    dishButton = new Button(ingredient1PositionX, ingredientPositionY-200, ingredientSizeX, ingredientSizeY, "button1 clicked");
+    dishButton.setTextPositionX(ingredient1PositionX+100);
+    dishButton.setTextPositionY(ingredientPositionY-150);
+    dishButton.setTexetSize(30);
+
+    calorieButton = new Button(ingredient3PositionX, ingredientPositionY-200, ingredientSizeX, ingredientSizeY, "button1 clicked");
+    calorieButton.setTextPositionX(ingredient3PositionX+100);
+    calorieButton.setTextPositionY(ingredientPositionY-150);
+    calorieButton.setTexetSize(30);
 
     parsingRecipe = new ParsingRecipe();
 
@@ -97,12 +104,15 @@ class Scene2{
   void pickIngredient(){
     if(button1Clicked){
         dishButton.drawButton();
+        calorieButton.drawButton();
     }
     else if(button2Clicked){
         dishButton.drawButton();
+        calorieButton.drawButton();
     }
     else if(button3Clicked){
         dishButton.drawButton();
+        calorieButton.drawButton();
     }
   }
   void pickDish(){
@@ -110,12 +120,15 @@ class Scene2{
     if(setCategory){
       if(button1Clicked){
         dishButton.setText(parsingRecipe.printDishName("한식"));
+        calorieButton.setText(parsingRecipe.dishHashMap.get(parsingRecipe.dishName));
       }
       else if(button2Clicked){
         dishButton.setText(parsingRecipe.printDishName("퓨전"));
+        calorieButton.setText(parsingRecipe.dishHashMap.get(parsingRecipe.dishName));
       }
       else if(button3Clicked){
         dishButton.setText(parsingRecipe.printDishName("이탈리아"));
+        calorieButton.setText(parsingRecipe.dishHashMap.get(parsingRecipe.dishName));
       }
     }
     setCategory = false;

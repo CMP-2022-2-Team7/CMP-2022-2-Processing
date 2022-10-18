@@ -24,7 +24,7 @@ float volume = 1.0;
 void setup(){
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
   bgm.play();
-  
+
   size(800, 450);
 
   lobbyUI = new LobbyUI();
@@ -88,19 +88,19 @@ void mousePressed(){
   if(movecredit == true){
    if(creditscene.backButton.checkClick()){
       move0 = true;
-      movecredit = false; 
+      movecredit = false;
     }
   }
   if(movesetting == true){
   if(settingscene.backButton.checkClick()){
       move0 = true;
-      movesetting = false; 
+      movesetting = false;
     }
   }
   if(movestory == true){
    if(storyscene.backButton.checkClick()){
       move0 = true;
-      movestory = false; 
+      movestory = false;
     }else if(storyscene.goButton.checkClick()){
      background(0);
    }
@@ -234,5 +234,5 @@ settingscene.a = 620;
 settingscene.a = 270;
 }
 volume = settingscene.sound ;
- 
+
 }
