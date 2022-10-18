@@ -7,6 +7,8 @@ LobbyUI lobbyUI;
 CreditScene creditscene;
 StoryScene storyscene;
 Scene1Story scene1story;
+Scene2Story scene2story;
+Scene3Story scene3story;
 Scene1 scene1;
 Scene2 scene2;
 Scene3 scene3;
@@ -16,6 +18,8 @@ boolean move0;
 boolean movecredit;
 boolean movestory;
 boolean movestory1;
+boolean movestory2;
+boolean movestory3;
 boolean move1;
 boolean move2;
 boolean move3;
@@ -41,6 +45,8 @@ void setup(){
   creditscene = new CreditScene();
   storyscene = new StoryScene();
   scene1story = new Scene1Story();
+  scene2story = new Scene2Story();
+  scene3story = new Scene3Story();
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
@@ -67,6 +73,14 @@ void draw(){
   if(movestory1 == true){
     scene1story.drawScene1Story();
   }
+     if(movestory2 == true){
+    scene2story.drawScene2Story();
+    move1 = false;
+  }
+    if(movestory3 == true){
+    scene3story.drawScene3Story();
+    move2 = false;
+    }
   if(move1 == true){
     scene1.drawScene1();
   }
@@ -133,9 +147,22 @@ void mousePressed(){
 
 
  if(movestory1 == true){
-    if(scene1story.goButton.checkClick()){
-    background(255);
+   if(scene1story.goButton.checkClick()){
+    movestory1 = false;
+    move1 = true;
    }}
+ if(movestory2 == true){
+    if(scene2story.goButton.checkClick()){
+    movestory2 = false;
+    move2 = true;
+   }}
+    if(movestory3 == true){
+    if(scene3story.goButton.checkClick()){
+    movestory3 = false;
+    move3 = true;
+   }}
+   
+   
 
    
   if(move2 == true){
@@ -254,7 +281,7 @@ void keyPressed(){
         println("success : " + scene1.success);
        }
        if (scene1.success == 5) {
-         move2 = true;
+         movestory2 = true;
          println("STAGE 2"); //move to stage 2
          scene1.germ_exist = false;
          scene1.timer = false;

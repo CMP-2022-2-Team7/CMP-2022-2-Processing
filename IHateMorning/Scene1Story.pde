@@ -3,13 +3,13 @@ class Scene1Story{
   String go = "GO";
   
   Scene1Story(){
-    goButton = new Button(700,380,55,40,go); 
+    goButton = new Button(400,380,55,40,go); 
     
     goButton.setTexetSize(28);
     goButton.setTextR(135);
     goButton.setTextG(205);
     goButton.setTextB(255);
-    goButton.setTextPositionX(728);
+    goButton.setTextPositionX(428);
     goButton.setTextPositionY(406);
   }
 
