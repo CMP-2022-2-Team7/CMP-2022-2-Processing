@@ -1,5 +1,5 @@
-import processing.sound.*;
-SoundFile bgm;
+//import processing.sound.*;
+//SoundFile bgm;
 
 LobbyUI lobbyUI;
 creditScene creditscene;
@@ -18,12 +18,19 @@ boolean move1;
 boolean move2;
 boolean move3;
 
+boolean objMoveRight;
+boolean objMoveLeft;
+
+//boolean 
+
 //기본bgm 음량 변수
 float volume = 1.0;
 
 void setup(){
-  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
-  bgm.play();
+  //bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+  //bgm.play();
+  
+  frameRate(60);
   
   size(800, 450);
 
@@ -43,7 +50,7 @@ void setup(){
   move3 = false;
 }
 void draw(){
-  bgm.amp(volume);
+  //bgm.amp(volume);
 
   if(move0 == true){
     lobbyUI.drawLobby();
@@ -65,6 +72,16 @@ void draw(){
     scene2.drawScene2();
   }
   if(move3 == true){
+    if(objMoveRight == true){
+      if(scene3.obj.x <= 700){
+        scene3.obj.x += 3;
+      }
+    }
+    if(objMoveLeft == true){
+      if(scene3.obj.x >= 20){
+        scene3.obj.x -= 3;
+      }
+    }
     scene3.drawScene3();
   }
 }
@@ -212,19 +229,23 @@ void keyPressed(){
   if(move3 == true){
     if(key == CODED){
       if(keyCode == RIGHT){
-        if(scene3.obj.x <= 700){
-          scene3.obj.x += 20;
-        }
-        image(scene3.background,0,0,width,height);
+        objMoveRight = true;
       }else if(keyCode == LEFT){
-        if(scene3.obj.x >= 20){
-          scene3.obj.x -= 20;
-        }
-        image(scene3.background,0,0,width,height);
+        objMoveLeft = true;
       }
     }
   }
 }
+
+void keyReleased(){
+  if(keyCode == RIGHT){
+    objMoveRight = false;
+  }
+  if(keyCode == LEFT){
+    objMoveLeft = false;
+  }
+}
+
 void mouseDragged(){
 //constrain(soundscene.a,250,630);
 settingscene.a = mouseX;
