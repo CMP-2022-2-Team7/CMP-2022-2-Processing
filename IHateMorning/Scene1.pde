@@ -13,7 +13,7 @@ class Scene1{
   boolean germ_exist = false;
   boolean timer = false;
   boolean click = true;  //front side toothbrush not appear again
-  int timeLimit = 900;
+  int timeLimit = 450;
   int hp = 5;
   int success = 0;
 
@@ -71,7 +71,7 @@ void toothbrush_follow() {  //image of toothbrush is following
     image(background, 0, 0, width, height);  //face while brushing
     image(basic, xpos - 20, ypos - 20, 40, 40);  //germ
     fill(0);
-    textSize(20);
+    textSize(40);
     text("Remaining Time : " + timeLimit / 30, 380, 40);
   } else {
     background(0);
