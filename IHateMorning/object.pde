@@ -1,20 +1,24 @@
-class object{
-  int x,y = 0;
-  int direction;
+class Object{
+  float x,y = 0;
   
-  PImage obj_image;
+  PImage objImage;
+  PImage effect;
   
-  object(){
+  Object(){
     x = width/2;
     y = height/2 + 100;
-    direction = 0;
-    obj_image = loadImage("bag_man.png");
+    objImage = loadImage("bag_man.png");
+    effect = loadImage("effect.png");
     
   }
   
+  //플레이어 그리기
+  void drawObject(){
+    image(objImage,x,y);
+  }
   
-  
-  void drawobj(){
-    image(obj_image,x,y);
+  //충돌시 이펙트 그리기
+  void drawEffect(){
+    image(effect,x+10,y-10);
   }
 }

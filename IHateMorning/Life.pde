@@ -1,19 +1,21 @@
 class Life{
-  PImage Life;
-  int Life_x;
-  int Life_y;
+  PImage life;
+  int lifex;
+  int lifey;
   
   Life(int x){
-    Life = loadImage("Life.png");
-    Life_x = x;
-    Life_y = 10;
+    life = loadImage("Life.png");
+    lifex = x;
+    lifey = 10;
   }
   
+  //라이프 그리기
   void drawLife(){
-      image(Life,Life_x,Life_y);
+      image(life,lifex,lifey);
   }
   
-  void LifeCheck(){
+  //라이프 체크
+  void lifeCheck(){
     drawLife();
   }
 }

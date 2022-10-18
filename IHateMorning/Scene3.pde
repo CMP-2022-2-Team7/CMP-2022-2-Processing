@@ -1,245 +1,244 @@
 
 class Scene3{
-
-  object obj;
-  Obstacle Obs1_professor;
-  Obstacle Obs2_1_student;
-  Obstacle Obs2_2_student;
-  Obstacle Obs3_bicycle;
-  Obstacle Obs4_dog;
+  Object obj;
+  Obstacle obs1Professor;
+  Obstacle obs2Student1;
+  Obstacle obs2Student2;
+  Obstacle obs3Bicycle;
+  Obstacle obs4Dog;
   
   
-  int time_limit = 30; //시간 범위
-  int countDown; //현재 시간
+  int timeLimit = 30; //시간 범위
+  int ms = 1800; //현재 시간
   
   
-  ArrayList<Life> LifeSystem; //생명시스템 배열
+  ArrayList<Life> lifeSystem; //생명시스템 배열
   ArrayList<Obstacle> obsArray; //충돌체 배열
   
-  boolean hit = false; //물체 충돌
-  boolean hitx2 = false;
-  boolean Lifeis = false;
+  //물체 충돌
+  boolean hitProfessor = false;
+  boolean hitStudent1 = false;
+  boolean hitStudent2 = false;
+  boolean hitBicycle = false;
+  boolean hitDog = false;
+  boolean lifeis = false;
   
   PImage background;
   
   Scene3(){
       
-      //객체 생성
-    obj = new object();
-    Obs1_professor = new Obstacle();
-    Obs2_1_student = new Obstacle();
-    Obs2_2_student = new Obstacle();
-    Obs3_bicycle = new Obstacle();
-    Obs4_dog = new Obstacle();
+    //객체 생성
+    obj = new Object();
+    obs1Professor = new Obstacle("professor");
+    obs2Student1 = new Obstacle("student");
+    obs2Student2 = new Obstacle("student");
+    obs3Bicycle = new Obstacle("bicycle");
+    obs4Dog = new Obstacle("dog");
     
       
-    LifeSystem = new ArrayList<Life>();
-    LifeSystem.add(new Life(20));
-    LifeSystem.add(new Life(45));
-    LifeSystem.add(new Life(70));
+    lifeSystem = new ArrayList<Life>();
+    lifeSystem.add(new Life(20));
+    lifeSystem.add(new Life(45));
+    lifeSystem.add(new Life(70));
       
     background = loadImage("background.jpg");
-    //image(background,0,0,width,height);
   }
   
   void drawScene3(){
-    int ms = millis()/1000;
    
     fill(0); //글씨 색
-    countDown = time_limit - ms;
     
    //시간이 있을 때
-    if(countDown > 0){
+    if(ms > 0){
     
     //시간 출력
       image(background,0,0,width,height);
       textSize(20);
       text("Time Remaining to Destination : ",385,30);
       fill(255,0,0);
-      text(countDown, 530,31);
+      text(ms/60, 550,31);
       
       
       //충돌 체크
-      //CheckCollision1();
-      
       CheckCollision();
       
-      Obs1_professor.obs_professor();
-      Obs2_1_student.obs_student_1();
-      Obs2_2_student.obs_student_2();
-      Obs3_bicycle.obs_bicycle();
-      Obs4_dog.obs_dog();
-      obj.drawobj();
-      
-      
-    //충돌하지 않았을때
-      //Collision();
+      //충돌시 라이프 변화
+      collision();
       
       //라이프 구현
-      for(Life life : LifeSystem){
+      for(Life life : lifeSystem){
       life.drawLife();
       }
+      
+      ms --;
       
     }else{ //시간이 끝났을 때
        background(0); //배경 변환
        fill(255); //글씨 색
        textSize(50); //글씨 크기
-       text("Arrive!",330,height/2); //도착했다는 문구 출력
+       text("Arrive!",370,height/2); //도착했다는 문구 출력
     }
   }
   
-  //void keyPressed(){
-  //  if(key == CODED){
-  //    if(keyCode == RIGHT){
-  //      if(obj.x <= 700){
-  //        obj.x += 20;
-  //      }
-  //      background(255);
-  //      image(background,0,0,width,height);
-  //    }else if(keyCode == LEFT){
-  //      if(obj.x >= 20){
-  //        obj.x -= 20;
-  //      }
-  //      background(255);
-  //      image(background,0,0,width,height);
-  //    }
-  //  }
-  //}
-  
-  
-  boolean CheckCollision(){
-    if(Obs1_professor.y > obj.y - 10
-      ||Obs2_1_student.y > obj.y - 10
-      ||Obs2_2_student.y > obj.y - 10
-      ||Obs3_bicycle.y > obj.y - 10
-      ||Obs4_dog.y > obj.y - 10){
-        if(Obs1_professor.x > obj.x - 30 && Obs1_professor.x < obj.x + 30
-        || Obs2_1_student.x > obj.x - 30 && Obs2_1_student.x < obj.x + 30
-        || Obs2_2_student.x > obj.x - 30 && Obs2_2_student.x < obj.x + 30
-        || Obs4_dog.x > obj.x - 30 && Obs4_dog.x < obj.x + 30){
-          hit = true;
-          println("hit");
-          return false;
-        }
-        if(Obs3_bicycle.x > obj.x - 30 && Obs3_bicycle.x < obj.x + 30){
-          hitx2 = true;
-          println("hitx2");
-          return false;
-        }
-    }
-    return false;
-  }
-  
-  void CheckCollision1(){
-    if(Obs1_professor.y > obj.y - 10){
-      if(Obs1_professor.x > obj.x - 30 && Obs1_professor.x < obj.x + 30){
-        hit = true;
-        println("hit");
-      }
-    }
-    
-    if(Obs2_1_student.y > obj.y - 10){
-      if(Obs2_1_student.x > obj.x - 30 && Obs2_1_student.x < obj.x + 30){
-        hit = true;
-        println("hit");
-      }
-    }
-    
-    if(Obs2_2_student.y > obj.y - 10){
-      if(Obs2_2_student.x > obj.x - 30 && Obs2_2_student.x < obj.x + 30){
-        hit = true;
-        println("hit");
-      }
-    }
-    
-    if(Obs3_bicycle.y > obj.y - 10){
-      if(Obs3_bicycle.x > obj.x - 30 && Obs3_bicycle.x < obj.x + 30){
-        hit = true;
-        println("hit");
-      }
-    }
-    
-    if(Obs4_dog.y > obj.y - 10){
-      if(Obs4_dog.x > obj.x - 30 && Obs4_dog.x < obj.x + 30){
-        hitx2 = true;
-        println("hitx2");
-      }
+  //충돌 체크
+  void CheckCollision(){
+  if(obs1Professor.y > obj.y - 10){
+    if(obs1Professor.x > obj.x - 30 && obs1Professor.x < obj.x + 30){
+      hitProfessor = true;
+      obs1Professor.y = 0;
+      obs1Professor.x = random(50,750);
+      println("hit_pro");
     }
   }
   
+  if(obs2Student1.y > obj.y - 10){
+    if(obs2Student1.x > obj.x - 30 && obs2Student1.x < obj.x + 30){
+      hitStudent1 = true;
+      obs2Student1.y = 0;
+      obs2Student1.x = random(50,750);
+      println("hit_stu1");
+    }
+  }
   
+  if(obs2Student2.y > obj.y - 10){
+    if(obs2Student2.x > obj.x - 30 && obs2Student2.x < obj.x + 30){
+      hitStudent2 = true;
+      obs2Student2.y = 0;
+      obs2Student2.x = random(50,750);
+      println("hit_stu2");
+    }
+  }
   
+  if(obs3Bicycle.y > obj.y - 50){
+    if(obs3Bicycle.x > obj.x -25 && obs3Bicycle.x < obj.x + 30){
+      hitBicycle = true;
+      obs3Bicycle.y = 0;
+      obs3Bicycle.x = random(50,750);
+      println("hit_bi");
+    }
+  }
   
-  void Collision(){
-    if(LifeSystem.size() > 0){
-        
-        Obs1_professor.obs_professor();
-        Obs2_1_student.obs_student_1();
-        Obs2_2_student.obs_student_2();
-        Obs3_bicycle.obs_bicycle();
-        Obs4_dog.obs_dog();
-        obj.drawobj();
-        
-        //교수,학생,개 충돌
-        //라이프 3개일 때
-        
-        if(LifeSystem.size() == 1 && hit == true){
-          LifeSystem.remove(0);
-          hit = false;
-          Obs1_professor.obs_professor();
-          Obs2_1_student.obs_student_1();
-          Obs2_2_student.obs_student_2();
-          Obs3_bicycle.obs_bicycle();
-          Obs4_dog.obs_dog();
-          obj.drawobj();
-        }
-        
-        if(LifeSystem.size() == 2 && hitx2 == true){
-          LifeSystem.remove(0);
-          hitx2 = false;
-          Obs1_professor.obs_professor();
-          Obs2_1_student.obs_student_1();
-          Obs2_2_student.obs_student_2();
-          Obs3_bicycle.obs_bicycle();
-          Obs4_dog.obs_dog();
-          obj.drawobj();
-        }
-        
-        if(LifeSystem.size() == 2 && hit == true){
-          LifeSystem.remove(1);
-          hit = false;
-          Obs1_professor.obs_professor();
-          Obs2_1_student.obs_student_1();
-          Obs2_2_student.obs_student_2();
-          Obs3_bicycle.obs_bicycle();
-          Obs4_dog.obs_dog();
-          obj.drawobj();
-        }
-        
-        if(LifeSystem.size() == 3 && hit == true){
-          LifeSystem.remove(2);
-          hit = false;
-          Obs1_professor.obs_professor();
-          Obs2_1_student.obs_student_1();
-          Obs2_2_student.obs_student_2();
-          Obs3_bicycle.obs_bicycle();
-          Obs4_dog.obs_dog();
-          obj.drawobj();
+  if(obs4Dog.y > obj.y - 10){
+    if(obs4Dog.x > obj.x - 25 && obs4Dog.x < obj.x + 25){
+      hitDog = true;
+      obs4Dog.y = 0;
+      obs4Dog.x = random(50,750);
+      println("hit_dog");
+    }
+  }
+}
+  
+  //충돌시 라이프 변화
+  void collision(){
+  if(lifeSystem.size() > 0){
+      
+      obs1Professor.moveObstacle(2);
+      obs2Student1.moveObstacle(3);
+      obs2Student2.moveObstacle(4);
+      obs3Bicycle.moveObstacle(5);
+      obs4Dog.moveObstacle(3.5);
+      obj.drawObject();
+      
+      
+      //교수님이랑 충돌할 때
+      if(hitProfessor == true){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitProfessor = false;
+          obj.drawEffect();
           
-        }if(LifeSystem.size() == 3 && hitx2 == true){
-          LifeSystem.remove(2);
-          LifeSystem.remove(1);
-          hitx2 = false;
-          Obs1_professor.obs_professor();
-          Obs2_1_student.obs_student_1();
-          Obs2_2_student.obs_student_2();
-          Obs3_bicycle.obs_bicycle();
-          Obs4_dog.obs_dog();
-          obj.drawobj();
+        } else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitProfessor = false;
+          obj.drawEffect();
+
+        } else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitProfessor = false;
+          obj.drawEffect();
+          
         }
-      }else{
-          background(0); //게임 오버 화면 변환
-          delay(100); //딜레이
+        //학생1이랑 충돌할 때
+      }else if(hitStudent1 == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitStudent1 = false;
+          obj.drawEffect();
+
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitStudent1 = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitStudent1 = false;
+          obj.drawEffect();
+          
+        }
+        //학생2랑 충돌할 때
+      }else if(hitStudent2 == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitStudent2 = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitStudent2 = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitStudent2 = false;
+          obj.drawEffect();
+          
+        }
+        //자전거랑 충돌할 때
+      }else if(hitBicycle == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitBicycle = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          lifeSystem.remove(0);
+          hitBicycle = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          lifeSystem.remove(1);
+          hitBicycle = false;
+          obj.drawEffect();
+          
+        }
+        //강아지랑 충돌할 때
+      }else if(hitDog == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitDog = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitDog = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitDog = false;
+          obj.drawEffect();
+          
+        }
+        obj.drawEffect();
       }
-  }
+    }else{
+        background(0); //게임 오버 화면 변환
+        fill(255);
+        text("Game Over",400,height/2);
+        delay(100); //딜레이
+    }
+  } 
 }
