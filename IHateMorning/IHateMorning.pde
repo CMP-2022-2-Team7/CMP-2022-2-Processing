@@ -36,7 +36,10 @@ void setup(){
   //temporary background music
   bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
   bgm1 = new SoundFile(this, "p-20-122596.mp3");
-  bgm.play();
+  bgm1.loop();
+
+ 
+
 
   //temporary font
   font = loadFont("FreestyleScript-Regular-48.vlw");
@@ -129,9 +132,9 @@ void mousePressed(){
     if(lobbyUI.checkClick()){
       lobbyUI.changeSoundImg();
       if(lobbyUI.soundStatus == true){
-        bgm.play();
+        bgm1.play();
       }else if(lobbyUI.soundStatus == false){
-      bgm.pause();}
+      bgm1.pause();}
     }
   }
 

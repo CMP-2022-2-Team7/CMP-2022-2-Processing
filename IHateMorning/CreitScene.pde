@@ -17,6 +17,7 @@ class CreditScene{
   void drawcreditscene(){
   background(135, 206, 235);
   image(creditImg,0,0,800,500);
+  fill(255);
   textSize(35);
   text("202127185 Semin Eun",width/2,150);
   text("201623445 Hyeoungchan Jo",width/2,210);

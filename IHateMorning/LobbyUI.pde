@@ -89,6 +89,7 @@ class LobbyUI{
 
   /* set the property of name of game */
   void drawTitle(){
+    fill(255);
     textAlign(CENTER);
     textSize(72);
     text(title, width/2, titleMoving);
