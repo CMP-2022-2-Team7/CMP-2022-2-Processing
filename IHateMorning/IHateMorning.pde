@@ -25,6 +25,7 @@ boolean move1;
 boolean move2;
 boolean move3;
 boolean moveending;
+boolean moveending2;
 
 boolean objMoveRight;
 boolean objMoveLeft;
@@ -55,7 +56,7 @@ void setup(){
   scene1 = new Scene1();
   scene2 = new Scene2();
   scene3 = new Scene3();
-  endingscene = new EndingScene();
+  endingscene = new EndingScene("GAME  OVER");
   move0 = true;
   movecredit = false;
   movestory = false;
@@ -77,6 +78,7 @@ void draw(){
     storyscene.drawstoryscene();
   }
   if(movestory1 == true){
+    scene1 = new Scene1();
     scene1story.drawScene1Story();
   }
      if(movestory2 == true){
@@ -86,8 +88,14 @@ void draw(){
     if(movestory3 == true){
     scene3story.drawScene3Story();
     move2 = false;
+    scene3 = new Scene3();
     }
     if(moveending == true){
+      endingscene = new EndingScene("GAME  OVER");
+      endingscene.drawEndingScene();
+    }
+    if(moveending2){
+      endingscene = new EndingScene("GAME CLEAR");
       endingscene.drawEndingScene();
     }
   if(move1 == true){
@@ -171,6 +179,7 @@ void mousePressed(){
  if(movestory2 == true){
     if(scene2story.goButton.checkClick()){
     movestory2 = false;
+    scene2 = new Scene2();
     move2 = true;
    }}
     if(movestory3 == true){

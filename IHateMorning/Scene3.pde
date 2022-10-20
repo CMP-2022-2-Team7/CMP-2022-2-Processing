@@ -9,7 +9,7 @@ class Scene3{
   
   
   int timeLimit = 10; //시간 범위
-  int ms = 180; //현재 시간
+  int ms = 1800; //현재 시간
   
   
   ArrayList<Life> lifeSystem; //생명시스템 배열
@@ -77,12 +77,8 @@ class Scene3{
       ms --;
       
     }else{ //시간이 끝났을 때
-      /* background(0); //배경 변환
-       fill(255); //글씨 색
-       textSize(50); //글씨 크기
-       text("Arrive!",370,height/2); //도착했다는 문구 출력*/
        move3 = false;
-       moveending = true;
+       moveending2 = true;
     }
   }
   
@@ -268,11 +264,9 @@ class Scene3{
         }
       }
     }else{
-        background(0); //게임 오버 화면 변환
-        fill(255);
-        textSize(100);
-        text("Game Over",400,height/2);
-        delay(100); //딜레이
+      move3 = false;
+      endingscene.endText = "GAME OVER";
+      moveending = true;
       }
   }
   

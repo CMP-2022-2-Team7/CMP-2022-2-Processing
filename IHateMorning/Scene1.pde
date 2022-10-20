@@ -41,13 +41,13 @@ class Scene1{
      if(stop == true){
      brush_ex();  //toothbrush follows
      }
+     timeLimit--;
   }
   if (pick == true) {  //pick toothbrush
     brush = true;
     germ_exist = true;
     pick = false;
   }
-  timeLimit--;
   }
   
   void brush_ex() {
