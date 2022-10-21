@@ -53,7 +53,7 @@ class Scene2{
     scene2Checking = 0;
     /* load background image */
     background = loadImage("kitchen-stage2.jpg");
-    mom = loadImage("mom-stage2.png");
+    mom = loadImage("mother.png");
 
     /* make ingredient list and add ingredient that user choose */
     ingredientList = new ArrayList<String>();
@@ -74,9 +74,9 @@ class Scene2{
 
     /* Generate divide button and set specification */
     divideButton = new Button(0,ingredientPositionY-30,width, 330, "");
-    divideButton.setButtonR(130);
-    divideButton.setButtonG(190);
-    divideButton.setButtonB(255);
+    divideButton.setButtonR(242);
+    divideButton.setButtonG(228);
+    divideButton.setButtonB(197);
 
     /* generate ingredient button and set specification */
     ingredientButton1 = new Button(ingredient1PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, ingredientList.get(0));
@@ -131,7 +131,7 @@ class Scene2{
     textFont(stage2Font);
     /* clear sceen */
     image(background, 0, 0, width, height);
-    image(mom, 400, 0, width/2, height/1.5);
+    image(mom, 400, 0, width/2, height);
     divideButton.drawButton();
 
     /* Pick categories */

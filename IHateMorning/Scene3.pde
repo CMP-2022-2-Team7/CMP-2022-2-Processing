@@ -3,6 +3,7 @@ class Scene3{
   Obstacle obs1Professor;
   Obstacle obs2Student1;
   Obstacle obs2Student2;
+  Obstacle obs2Student3;
   Obstacle obs3Bicycle;
   Obstacle obs4Dog;
   Obstacle obs5Ball;
@@ -19,6 +20,7 @@ class Scene3{
   boolean hitProfessor = false;
   boolean hitStudent1 = false;
   boolean hitStudent2 = false;
+  boolean hitStudent3 = false;
   boolean hitBicycle = false;
   boolean hitDog = false;
   boolean hitBall = false;
@@ -35,6 +37,7 @@ class Scene3{
     obs1Professor = new Obstacle("professor");
     obs2Student1 = new Obstacle("student1");
     obs2Student2 = new Obstacle("student2");
+    obs2Student3 = new Obstacle("student3");
     obs3Bicycle = new Obstacle("bicycle");
     obs4Dog = new Obstacle("dog");
     obs5Ball = new Obstacle("ball");
@@ -87,7 +90,7 @@ class Scene3{
   if(obs1Professor.y > obj.y - 70 && obs1Professor.y < obj.y + 70){
     if(obs1Professor.x > obj.x - 30 && obs1Professor.x < obj.x + 70){
       hitProfessor = true;
-      obs1Professor.y = -300;
+      obs1Professor.y = -100;
       obs1Professor.x = random(100,600);
       println("hit_pro");
     }
@@ -96,7 +99,7 @@ class Scene3{
   if(obs2Student1.y > obj.y - 70 && obs2Student1.y < obj.y + 70){
     if(obs2Student1.x > obj.x - 30 && obs2Student1.x < obj.x + 70){
       hitStudent1 = true;
-      obs2Student1.y = -300;
+      obs2Student1.y = -100;
       obs2Student1.x = random(100,600);
       println("hit_stu1");
     }
@@ -105,16 +108,25 @@ class Scene3{
   if(obs2Student2.y > obj.y - 100 && obs2Student2.y < obj.y + 50){
     if(obs2Student2.x > obj.x - 70 && obs2Student2.x < obj.x + 30){
       hitStudent2 = true;
-      obs2Student2.y = -300;
+      obs2Student2.y = -100;
       obs2Student2.x = random(100,600);
       println("hit_stu2");
+    }
+  }
+  
+  if(obs2Student3.y > obj.y - 100 && obs2Student3.y < obj.y + 50){
+    if(obs2Student3.x > obj.x - 70 && obs2Student3.x < obj.x + 30){
+      hitStudent3 = true;
+      obs2Student3.y = -100;
+      obs2Student3.x = random(100,600);
+      println("hit_stu3");
     }
   }
   
   if(obs3Bicycle.y > obj.y - 100 && obs3Bicycle.y < obj.y + 50){
     if(obs3Bicycle.x > obj.x -40 && obs3Bicycle.x < obj.x + 60){
       hitBicycle = true;
-      obs3Bicycle.y = -300;
+      obs3Bicycle.y = -100;
       obs3Bicycle.x = random(100,600);
       println("hit_bi");
     }
@@ -123,7 +135,7 @@ class Scene3{
   if(obs4Dog.y > obj.y - 50 && obs4Dog.y < obj.y + 50){
     if(obs4Dog.x > obj.x - 45 && obs4Dog.x < obj.x + 70){
       hitDog = true;
-      obs4Dog.y = -300;
+      obs4Dog.y = -100;
       obs4Dog.x = random(100,600);
       println("hit_dog");
     }
@@ -132,7 +144,7 @@ class Scene3{
   if(obs5Ball.y > obj.y - 50 && obs5Ball.y < obj.y + 50){
     if(obs5Ball.x > obj.x - 45 && obs5Ball.x < obj.x + 70){
       hitBall = true;
-      obs5Ball.y = -300;
+      obs5Ball.y = -100;
       obs5Ball.x = random(100,600);
       println("hit_ball");
     }
@@ -146,6 +158,7 @@ class Scene3{
       obs1Professor.moveObstacle();
       obs2Student1.moveObstacle();
       obs2Student2.moveObstacle();
+      obs2Student3.moveObstacle();
       obs3Bicycle.moveObstacle();
       obs4Dog.moveObstacle();
       obs5Ball.moveObstacle();
@@ -203,6 +216,24 @@ class Scene3{
         }else if(lifeSystem.size() == 3){
           lifeSystem.remove(2);
           hitStudent2 = false;
+          obj.drawEffect();
+          
+        }
+        //학생3이랑 충돌할 때
+      }else if(hitStudent3 == true && lifeSystem.size() > 0){
+        if(lifeSystem.size() == 1){
+          lifeSystem.remove(0);
+          hitStudent3 = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 2){
+          lifeSystem.remove(1);
+          hitStudent3 = false;
+          obj.drawEffect();
+          
+        }else if(lifeSystem.size() == 3){
+          lifeSystem.remove(2);
+          hitStudent3 = false;
           obj.drawEffect();
           
         }

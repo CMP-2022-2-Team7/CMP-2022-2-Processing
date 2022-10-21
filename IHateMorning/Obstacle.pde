@@ -18,6 +18,9 @@ class Obstacle{
     }else if(i == "student2"){
       image = loadImage("boy.png");
       speed = 4.2;
+    }else if(i == "student3"){
+      image = loadImage("boy.png");
+      speed = 4.4;
     }else if(i == "bicycle"){
       image = loadImage("bicycle.png");
       speed = 5;

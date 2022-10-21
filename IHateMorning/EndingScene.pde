@@ -15,9 +15,9 @@ class EndingScene{
     endButton = new Button(352,380,110,40,"Back to Title"); 
     
     endButton.setTexetSize(28);
-    endButton.setTextR(135);
-    endButton.setTextG(205);
-    endButton.setTextB(255);
+    endButton.setTextR(0);
+    endButton.setTextG(0);
+    endButton.setTextB(0);
     endButton.setTextPositionX(406);
     endButton.setTextPositionY(406);
   }

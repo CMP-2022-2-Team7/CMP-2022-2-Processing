@@ -27,13 +27,13 @@ class LobbyUI{
     startSizeY = 80;
     startPositionX = width/2-200;
     startPositionY = 400-titleMoving;
-
+    
     /* generate start button and set specification */
     startButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, start);
     startButton.setTexetSize(48);
-    startButton.setTextR(135);
-    startButton.setTextG(206);
-    startButton.setTextB(255);
+    startButton.setTextR(0);
+    startButton.setTextG(0);
+    startButton.setTextB(0);
     startButton.setTextPositionX(width/2);
     startButton.setTextPositionY(450-titleMoving);
 
@@ -46,9 +46,9 @@ class LobbyUI{
     /* generate credit button and set specification */
     creditButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, credit);
     creditButton.setTexetSize(48);
-    creditButton.setTextR(135);
-    creditButton.setTextG(206);
-    creditButton.setTextB(255);
+    creditButton.setTextR(0);
+    creditButton.setTextG(0);
+    creditButton.setTextB(0);
     creditButton.setTextPositionX(width/2);
     creditButton.setTextPositionY(460-titleMoving);
   }
