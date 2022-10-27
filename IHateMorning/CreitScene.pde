@@ -27,6 +27,5 @@ class CreditScene{
   
    backButton.drawButton();
     
-
   }
 }

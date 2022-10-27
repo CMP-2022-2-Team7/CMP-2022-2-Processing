@@ -1,6 +1,5 @@
 class StoryScene{
   PImage storyImg;
-  PImage clockImg;
   Button backButton;
   Button goButton; // can delete
   String back = "BACK";
@@ -8,7 +7,6 @@ class StoryScene{
 
  StoryScene(){
     storyImg = loadImage("story.png");
-   // clockImg = loadImage("clock.png");
     backButton = new Button(45, 42, 55, 40, back);
     goButton = new Button(700,380,55,40,go); // can delete
     
@@ -30,7 +28,6 @@ class StoryScene{
   void drawstoryscene(){
   background(255);
   image(storyImg,0,0,800,480);
- // image(clockImg,40,25,400,410);
   fill(0);
   textSize(35);
   text("I  had  to  go  to  school  by  nine,  but  I  overslept,,", width/2, 180);

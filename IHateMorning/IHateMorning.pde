@@ -1,5 +1,4 @@
 import processing.sound.*;
-SoundFile bgm;
 SoundFile bgm1;
 PFont font;
 
@@ -32,19 +31,13 @@ boolean objMoveLeft;
 
 float volume = 1.0;
 
-
 void setup(){
-  //temporary background music
-//  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+  //play background music
   bgm1 = new SoundFile(this, "p-20-122596.mp3");
   bgm1.loop();
 
- 
-
-
-  //temporary font
- // font = loadFont("FreestyleScript-Regular-48.vlw");
- font  = loadFont("H2sa1M-48.vlw");
+  font  = loadFont("H2sa1M-48.vlw");
+  
   size(800, 450);
 
   lobbyUI = new LobbyUI();
@@ -64,8 +57,8 @@ void setup(){
   move2 = false;
   move3 = false;
 }
-void draw(){
 
+void draw(){
   textFont(font,50);
 
   if(move0 == true){
@@ -196,9 +189,6 @@ void mousePressed(){
     move3 = true;
    }}
    
-   
-
-
   if(move2 == true){
     if(scene2.phase1 || scene2.phase3){
       if(scene2.ingredientButton1.checkClick()){
@@ -255,7 +245,7 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-  if(key == '1'){
+    if(key == '1'){
     if(move1 == false){
       move0 = false;
       move1 = true;

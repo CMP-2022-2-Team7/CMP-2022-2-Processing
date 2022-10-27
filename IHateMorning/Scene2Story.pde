@@ -23,11 +23,7 @@ class Scene2Story{
   void drawScene2Story(){
   image(story2Img,0,0,800,480);
   fill(255);
-/*  textSize(35);
-  text("Now  you  have  to  eat  breakfast!", width/2, 205);
-  text("pick  the  category  you  want  and  decide  eating  or  not  until  your  mom  is  satisfied", width/2, 240);
-  text("Enjoy  your  meal!!", width/2, 275);*/
-  
+
   goButton.drawButton();
 }
 }
