@@ -60,10 +60,10 @@ class Scene3{
     
     //시간 출력
       image(background,0,0,width,height);
-      textSize(40);
-      text("Time Remaining to Destination : ",385,30);
+      textSize(35);
+      text("Time Remaining to Destination : ",373,40);
       fill(255,0,0);
-      text(ms/60, 550,31);
+      text(ms/60, 570,41);
       
       
       //충돌 체크

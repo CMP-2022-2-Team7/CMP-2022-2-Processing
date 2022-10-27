@@ -77,39 +77,47 @@ class Scene2{
     divideButton.setButtonR(242);
     divideButton.setButtonG(228);
     divideButton.setButtonB(197);
+   // divideButton.setButtonA(150);
 
     /* generate ingredient button and set specification */
     ingredientButton1 = new Button(ingredient1PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, ingredientList.get(0));
     ingredientButton1.setTextPositionX(ingredient1PositionX+100);
     ingredientButton1.setTextPositionY(ingredientPositionY+50);
     ingredientButton1.setTexetSize(30);
+    ingredientButton1.setButtonA(150);
 
     ingredientButton2 = new Button(ingredient2PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, ingredientList.get(1));
     ingredientButton2.setTextPositionX(ingredient2PositionX+100);
     ingredientButton2.setTextPositionY(ingredientPositionY+50);
     ingredientButton2.setTexetSize(30);
+    ingredientButton2.setButtonA(100);
+
 
     ingredientButton3 = new Button(ingredient3PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, ingredientList.get(2));
     ingredientButton3.setTextPositionX(ingredient3PositionX+100);
     ingredientButton3.setTextPositionY(ingredientPositionY+50);
     ingredientButton3.setTexetSize(30);
+    ingredientButton3.setButtonA(100);
 
     /* generate result button and set specification */
     dialogueButton = new Button(30, 30, 370, 260, "Good Morning!\nPick the category \nyou want to eat");
     dialogueButton.setTextPositionX((30+370)/2+10);
     dialogueButton.setTextPositionY((30+260)/2);
     dialogueButton.setTexetSize(25);
+    dialogueButton.setButtonA(100);
 
     /* Generate decision button and set specification */
     yesButton = new Button(ingredient1PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, "YES");
     yesButton.setTextPositionX(ingredient1PositionX+100);
     yesButton.setTextPositionY(ingredientPositionY+50);
     yesButton.setTexetSize(30);
+    yesButton.setButtonA(100);
 
     noButton = new Button(ingredient3PositionX,ingredientPositionY,ingredientSizeX, ingredientSizeY, "NO");
     noButton.setTextPositionX(ingredient3PositionX+100);
     noButton.setTextPositionY(ingredientPositionY+50);
     noButton.setTexetSize(30);
+    noButton.setButtonA(100);
 
     parsingRecipe = new ParsingRecipe();
 

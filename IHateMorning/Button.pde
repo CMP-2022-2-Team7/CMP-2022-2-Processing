@@ -18,6 +18,8 @@ class Button{
   private float textG;
   private float textB;
   private float textA;
+  
+  boolean st ;
 
   Button(float buttonPositionX, float buttonPositionY, float buttonSizeX, float buttonSizeY, String text
     ){

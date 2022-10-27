@@ -12,14 +12,14 @@ class EndingScene{
       endingImg = loadImage("background_ending.jpeg");
       fill(0);
    }
-    endButton = new Button(352,380,110,40,"Back to Title"); 
+    endButton = new Button(335,386,140,40,"Back to Title"); 
     
     endButton.setTexetSize(28);
     endButton.setTextR(0);
     endButton.setTextG(0);
     endButton.setTextB(0);
     endButton.setTextPositionX(406);
-    endButton.setTextPositionY(406);
+    endButton.setTextPositionY(420);
   }
 void drawEndingScene(){
   image(endingImg,0,0,800,500);

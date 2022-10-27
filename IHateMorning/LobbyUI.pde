@@ -8,6 +8,7 @@ class LobbyUI{
   String start = "START"; // start button text
   String credit = "CREDIT"; // credit button text
   int titleMoving = 0;  // variable for title, button's movement
+  int titleMoving2 = 0;
 
   int startSizeX; // variable for start button's X-axis size
   int startSizeY; // variable for start button's Y-axis size
@@ -30,10 +31,11 @@ class LobbyUI{
     
     /* generate start button and set specification */
     startButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, start);
-    startButton.setTexetSize(48);
+    startButton.setTexetSize(55);
     startButton.setTextR(0);
     startButton.setTextG(0);
     startButton.setTextB(0);
+    startButton.setButtonA(140);
     startButton.setTextPositionX(width/2);
     startButton.setTextPositionY(450-titleMoving);
 
@@ -45,10 +47,11 @@ class LobbyUI{
 
     /* generate credit button and set specification */
     creditButton = new Button(startPositionX, startPositionY, startSizeX, startSizeY, credit);
-    creditButton.setTexetSize(48);
+    creditButton.setTexetSize(55);
     creditButton.setTextR(0);
     creditButton.setTextG(0);
     creditButton.setTextB(0);
+    creditButton.setButtonA(140);
     creditButton.setTextPositionX(width/2);
     creditButton.setTextPositionY(460-titleMoving);
   }
@@ -67,17 +70,19 @@ class LobbyUI{
 
     startButton.drawButton();
     startButton.setButtonPositionY(startPositionY);
-    startButton.setTextPositionY(startPositionY+60);
+    startButton.setTextPositionY(startPositionY+69);
 
     startPositionY = 400-titleMoving;
     creditButton.drawButton();
     creditButton.setButtonPositionY(startPositionY);
-    creditButton.setTextPositionY(startPositionY+60);
+    creditButton.setTextPositionY(startPositionY+69);
 
     /* make title move */
-    if(titleMoving < 100){
+    if(titleMoving < 115){
       titleMoving++;
-    }
+    }/*else if(titleMoving2 < 130){
+      titleMoving++;
+    }*/
   }
 
   boolean checkClick(){
@@ -91,7 +96,7 @@ class LobbyUI{
   void drawTitle(){
     fill(255);
     textAlign(CENTER);
-    textSize(72);
+    textSize(90);
     text(title, width/2, titleMoving);
   }
 

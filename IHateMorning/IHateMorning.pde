@@ -35,7 +35,7 @@ float volume = 1.0;
 
 void setup(){
   //temporary background music
-  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
+//  bgm = new SoundFile(this,"Alon Peretz - Touch Base.mp3");
   bgm1 = new SoundFile(this, "p-20-122596.mp3");
   bgm1.loop();
 
@@ -43,8 +43,8 @@ void setup(){
 
 
   //temporary font
-  font = loadFont("FreestyleScript-Regular-48.vlw");
-
+ // font = loadFont("FreestyleScript-Regular-48.vlw");
+ font  = loadFont("H2sa1M-48.vlw");
   size(800, 450);
 
   lobbyUI = new LobbyUI();

@@ -64,7 +64,9 @@ class Scene1{
 }
 
 void toothbrush_follow() {  //image of toothbrush is following
+  tint(255,150);
   image(Tbrush, xposT - 100, yposT - 50, 150, 150);
+  noTint();
   xposT = lerp(xposT, mouseX, 1);
   yposT = lerp(yposT, mouseY, 1);
 }
@@ -82,7 +84,7 @@ void toothbrush_follow() {  //image of toothbrush is following
     image(basic, xpos - 20, ypos - 20, 40, 40);  //germ
     fill(0);
     textSize(40);
-    text("Remaining Time : " + timeLimit / 30, 380, 40);
+    text("Remaining Time : " + timeLimit / 30, 380, 45);
   } else {
     stop = false;
   /*  background(0);
@@ -90,7 +92,7 @@ void toothbrush_follow() {  //image of toothbrush is following
     textSize(100);
     text("GAME OVER", 380, 260);  //move to game over scene*/
     move1 = false;
-    endingscene.endText = "GAME OVER";
+    endingscene.endText = "G A M E  O V E R";
     moveending = true;
   }
 }
