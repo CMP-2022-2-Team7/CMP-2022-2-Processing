@@ -9,13 +9,8 @@ class Life{
     lifey = 10;
   }
   
-  //라이프 그리기
+  //draw Life
   void drawLife(){
       image(life,lifex,lifey);
-  }
-  
-  //라이프 체크
-  void lifeCheck(){
-    drawLife();
   }
 }

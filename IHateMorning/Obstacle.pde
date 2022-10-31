@@ -35,7 +35,7 @@ class Obstacle{
     
   }
   
-  //충돌물 움직임
+  //Draw an obstacle movement
   void moveObstacle(){
     image(image,x,y);
     if(y <= 500){

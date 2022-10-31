@@ -1,4 +1,6 @@
 class Scene3{
+  
+  //Create Object
   Object obj;
   Obstacle obs1Professor;
   Obstacle obs2Student1;
@@ -9,14 +11,15 @@ class Scene3{
   Obstacle obs5Ball;
   
   
-  int timeLimit = 10; //시간 범위
-  int ms = 1800; //현재 시간
+  int timeLimit = 10; //Time Range
+  int ms = 1800; //Current Time
   
   
-  ArrayList<Life> lifeSystem; //생명시스템 배열
-  ArrayList<Obstacle> obsArray; //충돌체 배열
+  ArrayList<Life> lifeSystem; //Life System Array
+  ArrayList<Book> bookArray; //Throwing Book Array
+  ArrayList<Book> drawBookArray; //Drawing Book Array
   
-  //물체 충돌
+  //Player and Obstacle Collision Variables
   boolean hitProfessor = false;
   boolean hitStudent1 = false;
   boolean hitStudent2 = false;
@@ -25,14 +28,24 @@ class Scene3{
   boolean hitDog = false;
   boolean hitBall = false;
   
-  //라이프 존재 여부
+  //Book and Obstacle Collision Variables
+  boolean bookProfessor = false;
+  boolean bookStudent1 = false;
+  boolean bookStudent2 = false;
+  boolean bookStudent3 = false;
+  boolean bookBicycle = false;
+  boolean bookDog = false;
+  boolean bookBall = false;
+  boolean bookNoHit = false;
+  
+  //Life Presence Variables
   boolean lifeis = false;
   
   PImage background;
   
   Scene3(){
       
-    //객체 생성
+    //Create Object
     obj = new Object();
     obs1Professor = new Obstacle("professor");
     obs2Student1 = new Obstacle("student1");
@@ -42,51 +55,83 @@ class Scene3{
     obs4Dog = new Obstacle("dog");
     obs5Ball = new Obstacle("ball");
     
-      
     lifeSystem = new ArrayList<Life>();
     lifeSystem.add(new Life(20));
     lifeSystem.add(new Life(45));
     lifeSystem.add(new Life(70));
-      
+    
+    bookArray = new ArrayList<Book>();
+    bookArray.add(new Book());
+    bookArray.add(new Book());
+    bookArray.add(new Book());
+    
+    drawBookArray = new ArrayList<Book>();
+    drawBookArray.add(new Book(20));
+    drawBookArray.add(new Book(45));
+    drawBookArray.add(new Book(70));
+    
     background = loadImage("background_road.png");
   }
   
   void drawScene3(){
    
-    fill(0); //글씨 색
+    fill(0); //Text Color
     
-   //시간이 있을 때
+   //Run when you have time
     if(ms > 0){
-    
-    //시간 출력
+      //Time Remaining Output
       image(background,0,0,width,height);
       textSize(35);
       text("Time Remaining to Destination : ",373,40);
       fill(255,0,0);
       text(ms/60, 570,41);
       
-      
-      //충돌 체크
+      //Collision check
       CheckCollision();
       
-      //충돌시 라이프 변화
+      //Changes in life and items in the event of a collision
       collision();
       
-      //라이프 구현
+      //Draw the rest of life
       for(Life life : lifeSystem){
-      life.drawLife();
+        life.drawLife();
+      }
+      
+      //Draw the rest of Book (item)
+      for(Book book : drawBookArray){
+        book.drawBook();
+      }
+      
+      //Draw throwing Book
+      if(bookthrow == true){
+        if(bookArray.size() > 0){
+          bookArray.get(bookArray.size()-1).bookX = obj.x;
+          bookArray.get(bookArray.size()-1).bookY -= 5;
+          bookArray.get(bookArray.size()-1).throwBook();
+          
+          if(bookArray.get(bookArray.size()-1).bookY == -100){
+            bookthrow = false;
+            bookNoHit = true;
+            if(bookArray.size() > 0){
+              bookArray.remove(bookArray.size()-1);
+            }
+          }
+        }
       }
       
       ms --;
       
-    }else{ //시간이 끝났을 때
+    }else{ //Run at the end of time
        move3 = false;
        moveending2 = true;
     }
   }
   
-  //충돌 체크
+  
+  
   void CheckCollision(){
+    
+  //Check for Obstacle Conflicts with the Player
   if(obs1Professor.y > obj.y - 70 && obs1Professor.y < obj.y + 70){
     if(obs1Professor.x > obj.x - 30 && obs1Professor.x < obj.x + 70){
       hitProfessor = true;
@@ -149,11 +194,102 @@ class Scene3{
       println("hit_ball");
     }
   }
+  
+  //Check book (item) and obstacle conflicts
+  if(bookArray.size() > 0 && bookthrow == true){
+    if(obs1Professor.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs1Professor.y < bookArray.get(bookArray.size()-1).bookY + 70){
+      if(obs1Professor.x > bookArray.get(bookArray.size()-1).bookX - 30 && obs1Professor.x < bookArray.get(bookArray.size()-1).bookX + 45){
+        bookProfessor = true;
+        obs1Professor.y = -100;
+        obs1Professor.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs2Student1.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs2Student1.y < bookArray.get(bookArray.size()-1).bookY + 70){
+      if(obs2Student1.x > bookArray.get(bookArray.size()-1).bookX - 40 && obs2Student1.x < bookArray.get(bookArray.size()-1).bookX + 45){
+        bookStudent1 = true;
+        obs2Student1.y = -100;
+        obs2Student1.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs2Student2.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs2Student2.y < bookArray.get(bookArray.size()-1).bookY + 50){
+      if(obs2Student2.x > bookArray.get(bookArray.size()-1).bookX - 40 && obs2Student2.x < bookArray.get(bookArray.size()-1).bookX + 40){
+        bookStudent2 = true;
+        obs2Student2.y = -100;
+        obs2Student2.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs2Student3.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs2Student3.y < bookArray.get(bookArray.size()-1).bookY + 50){
+      if(obs2Student3.x > bookArray.get(bookArray.size()-1).bookX - 40 && obs2Student3.x < bookArray.get(bookArray.size()-1).bookX + 40){
+        bookStudent3 = true;
+        obs2Student3.y = -100;
+        obs2Student3.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs3Bicycle.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs3Bicycle.y < bookArray.get(bookArray.size()-1).bookY + 50){
+      if(obs3Bicycle.x > bookArray.get(bookArray.size()-1).bookX -40 && obs3Bicycle.x < bookArray.get(bookArray.size()-1).bookX + 30){
+        bookBicycle = true;
+        obs3Bicycle.y = -100;
+        obs3Bicycle.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs4Dog.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs4Dog.y < bookArray.get(bookArray.size()-1).bookY + 50){
+      if(obs4Dog.x > bookArray.get(bookArray.size()-1).bookX - 45 && obs4Dog.x < bookArray.get(bookArray.size()-1).bookX + 50){
+        bookDog = true;
+        obs4Dog.y = -100;
+        obs4Dog.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+    
+    else if(obs5Ball.y > bookArray.get(bookArray.size()-1).bookY - 30 && obs5Ball.y < bookArray.get(bookArray.size()-1).bookY + 50){
+      if(obs5Ball.x > bookArray.get(bookArray.size()-1).bookX - 45 && obs5Ball.x < bookArray.get(bookArray.size()-1).bookX + 40){
+        bookBall = true;
+        obs5Ball.y = -100;
+        obs5Ball.x = random(100,600);
+        bookthrow = false;
+        if(bookArray.size() > 0){
+          bookArray.remove(bookArray.size()-1);
+        }
+      }
+    }
+  }else{
+      bookthrow = false;
+  }
 }
   
-  //충돌시 라이프 변화
+  //Changes in life and items in the event of a collision
   void collision(){
-  if(lifeSystem.size() > 0){
+    
+    //Run when you have remaining life
+    if(lifeSystem.size() > 0){
       
       obs1Professor.moveObstacle();
       obs2Student1.moveObstacle();
@@ -164,8 +300,124 @@ class Scene3{
       obs5Ball.moveObstacle();
       obj.drawObject();
       
+      //When a book collides with an obstacle
+      if(drawBookArray.size() > 0){
+        if(bookProfessor == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookProfessor = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookProfessor = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookProfessor = false;
+          }
+        }
+        else if(bookStudent1 == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookStudent1 = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookStudent1 = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookStudent1 = false;
+          }
+        }
+        else if(bookStudent2== true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookStudent2 = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookStudent2 = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookStudent2 = false;
+          }
+        }
+        else if(bookStudent3 == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookStudent3 = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookStudent3 = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookStudent3 = false;
+          }
+        }
+        else if(bookBicycle == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookBicycle = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookBicycle = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookBicycle = false;
+          }
+        }
+        else if(bookDog == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookDog = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookDog = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookDog = false;
+          }
+        }
+        else if(bookBall == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookBall = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookBall = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookBall = false;
+          }
+        }
+        else if(bookNoHit == true){
+          if(drawBookArray.size() == 1){
+            drawBookArray.remove(0);
+            bookNoHit = false;
+            
+          } else if(drawBookArray.size() == 2){
+            drawBookArray.remove(1);
+            bookNoHit = false;
+  
+          } else if(drawBookArray.size() == 3){
+            drawBookArray.remove(2);
+            bookNoHit = false;
+          }
+        }
+      }
       
-      //교수님이랑 충돌할 때
+      
+      //When a player conflicts with a professor
       if(hitProfessor == true){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -183,7 +435,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //학생1이랑 충돌할 때
+        //When a player conflicts with a Student1
       }else if(hitStudent1 == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -201,7 +453,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //학생2랑 충돌할 때
+        //When a player conflicts with a Student2
       }else if(hitStudent2 == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -219,7 +471,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //학생3이랑 충돌할 때
+        //When a player conflicts with a Student3
       }else if(hitStudent3 == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -237,7 +489,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //자전거랑 충돌할 때
+        //When a player conflicts with a Bicycle
       }else if(hitBicycle == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -257,7 +509,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //강아지랑 충돌할 때
+        //When a player conflicts with a Dog
       }else if(hitDog == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -275,7 +527,7 @@ class Scene3{
           obj.drawEffect();
           
         }
-        //공이랑 충돌할 때
+        //When a player conflicts with a Ball
       }else if(hitBall == true && lifeSystem.size() > 0){
         if(lifeSystem.size() == 1){
           lifeSystem.remove(0);
@@ -294,7 +546,7 @@ class Scene3{
           
         }
       }
-    }else{
+    }else{  //Run when you don't have remaining life
       move3 = false;
       endingscene.endText = "GAME OVER";
       moveending = true;

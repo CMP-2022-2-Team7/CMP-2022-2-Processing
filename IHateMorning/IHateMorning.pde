@@ -28,8 +28,10 @@ boolean moveending2;
 
 boolean objMoveRight;
 boolean objMoveLeft;
+boolean bookthrow;
 
 float volume = 1.0;
+
 
 void setup(){
   //play background music
@@ -279,6 +281,11 @@ void keyPressed(){
     else if(move3 == true){
       move0 = true;
       move3 = false;
+    }
+  }
+  if(key == 'b' || key == 'B' || key == 'ㅠ'){
+    if(bookthrow == false){
+      bookthrow = true;
     }
   }
   if(move1 == true){

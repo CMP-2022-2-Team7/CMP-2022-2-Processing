@@ -9,15 +9,14 @@ class Object{
     y = height/2 + 130;
     objImage = loadImage("player.png");
     effect = loadImage("effect.png");
-    
   }
   
-  //플레이어 그리기
+  //Draw Player
   void drawObject(){
     image(objImage,x,y);
   }
   
-  //충돌시 이펙트 그리기
+  //Draw effects in case of collision
   void drawEffect(){
     image(effect,x+10,y-10);
   }
